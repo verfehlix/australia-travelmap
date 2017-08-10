@@ -1,12 +1,28 @@
 <template>
-    <div>
-        <h1>{{ msg }}</h1>
-    </div>
+    <el-row>
+        <el-col :span="10">
+            <div class="grid-content bg-purple">
+                <h3>MAP</h3>
+                <MapComponent></MapComponent>
+            </div>
+        </el-col>
+
+        <el-col :span="14">
+            <div class="grid-content bg-purple-light">
+                <h3>PHOTOS</h3>
+                <PhotoComponent></PhotoComponent>
+            </div>
+        </el-col>
+    </el-row>
 </template>
 
 <script>
+    import MapComponent from '@/components/MapComponent'
+    import PhotoComponent from '@/components/PhotoComponent'
+
     export default {
-        name: 'hello',
+        name: 'main',
+        components: {MapComponent, PhotoComponent},
         data () {
             return {
                 msg: 'Welcome to Your Vue.js App'
@@ -16,22 +32,18 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-    h1, h2 {
-        font-weight: normal;
+<style>
+    .el-col {
+        border-radius: 4px;
     }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
+    .grid-content {
+        border-radius: 4px;
+        height: calc(100vh - 52px);
     }
-
-    li {
-        display: inline-block;
-        margin: 0 10px;
+    .bg-purple {
+        background: #d3dce6;
     }
-
-    a {
-        color: #42b983;
+    .bg-purple-light {
+        background: #e5e9f2;
     }
 </style>

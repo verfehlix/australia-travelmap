@@ -51,7 +51,7 @@ module.exports = {
     'no-trailing-spaces': 'error',
     'no-var': 'error',
     'no-whitespace-before-property': 'error',
-    'object-curly-newline': ['error', { 'multiline': true }],
+    // 'object-curly-newline': ['error', { 'multiline': true }],
     'object-curly-spacing': ['error', 'never'],
     'prefer-const': 'error',
     'semi': ['error', 'never'],
