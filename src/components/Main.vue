@@ -46,6 +46,10 @@
         background: #e5e9f2;
     }
 
+    .CarouselComponent {
+        display: none;
+    }
+
     @media only screen and (max-width: 768px) {
         #mapColumn {
             display: none;
