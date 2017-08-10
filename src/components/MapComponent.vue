@@ -2,13 +2,13 @@
     <div>
         <h1>HERE BE MAPS</h1>
         <el-row>
-            <el-button type="primary">Cairns</el-button>
+            <el-button type="primary" v-on:click="selectedPlace = 'Cairns'">Cairns</el-button>
         </el-row>
         <el-row>
-            <el-button type="primary">Brisbane</el-button>
+            <el-button type="primary" v-on:click="selectedPlace = 'Brisbane'">Brisbane</el-button>
         </el-row>
         <el-row>
-            <el-button type="primary">Sydney</el-button>
+            <el-button type="primary" v-on:click="selectedPlace = 'Sydney'">Sydney</el-button>
         </el-row>
     </div>
 </template>
@@ -18,7 +18,7 @@
         name: 'map',
         data () {
             return {
-                msg: 'Welcome to the MAPS'
+                selectedPlace: 'Sydney'
             }
         }
     }

@@ -2,14 +2,12 @@
     <el-row>
         <el-col :span="10">
             <div class="grid-content bg-purple">
-                <h3>MAP</h3>
                 <MapComponent></MapComponent>
             </div>
         </el-col>
 
         <el-col :span="14">
             <div class="grid-content bg-purple-light">
-                <h3>PHOTOS</h3>
                 <PhotoComponent></PhotoComponent>
             </div>
         </el-col>
