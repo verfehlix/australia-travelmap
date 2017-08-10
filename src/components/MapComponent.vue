@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mapComponent">
         <h1>HERE BE MAPS</h1>
         <el-row>
             <el-button type="primary" v-on:click="selectedPlace = 'Cairns'">Cairns</el-button>
