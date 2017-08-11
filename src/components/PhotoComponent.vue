@@ -1,22 +1,16 @@
 <template>
-    <div class="photoComponent">
+    <div>
 
         <h1>Sydney</h1>
         <span>Sydney [ˈsɪdni] ist die Hauptstadt des australischen Bundesstaates New South Wales und mit 5 Millionen Einwohnern[1] die größte Stadt in Australien.[2] Sydney wurde am 26. Januar 1788 gegründet und ist heute das Industrie-, Handels- und Finanzzentrum Australiens und ein wichtiger Tourismusort. Auch zahlreiche Universitäten, Museen und Galerien befinden sich hier. Sydney ist römisch-katholischer und anglikanischer Erzbischofssitz.</span>
 
-        <el-carousel v-if="showCarousel" id="photoCarousel" indicator-position="none" :autoplay="false">
-            <el-carousel-item v-for="fileName in photos" :key="fileName">
-                    <img v-bind:src="require('@/assets/sydney/' + fileName)" v-bind:alt="fileName" />
-            </el-carousel-item>
-        </el-carousel>
-
-        <el-row>
-            <el-col :xs="12" :sm="8" :md="8" :lg="6" v-for="fileName in photos" :key="fileName">
+        <div class="row">
+            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3" v-for="fileName in photos" :key="fileName">
                 <div class="photoContainer">
-                    <div v-on:click="photoClick(fileName)" class="testDiv" :style="{ 'background-image': 'url(' + require('@/assets/sydney/' + fileName) + ')' }"></div>
+                    <div v-on:click="photoClick(fileName)" class="photo" :style="{ 'background-image': 'url(' + require('@/assets/sydney/' + fileName) + ')' }"></div>
                 </div>
-            </el-col>
-        </el-row>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -39,9 +33,6 @@
 </script>
 
 <style scoped>
-    .photoComponent {
-        position: relative;
-    }
     .photoContainer {
         border-radius: 3px;
         margin: 10px;
@@ -55,7 +46,7 @@
 
         cursor: pointer;
     }
-    .testDiv {
+    .photo {
         border-radius: 3px;
 
         width: 200px;
@@ -65,7 +56,8 @@
         background-position: center center;
         background-repeat: no-repeat;
     }
-    #photoCarousel {
+
+    .carouselBackground {
         position: absolute;
         display: block;
         width: 100%;
@@ -76,5 +68,21 @@
         bottom: 0;
         background-color: rgba(0,0,0,0.5);
         z-index: 2;
+    }
+
+    .carousel {
+        position: absolute;
+        display: block;
+        width: auto;
+        top: 10%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 3;
+    }
+
+    .carouselPhoto{
+        height: 100%;
+        width: auto;
     }
 </style>

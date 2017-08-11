@@ -1,15 +1,15 @@
 <template>
     <div class="mapComponent">
         <h1>HERE BE MAPS</h1>
-        <el-row>
-            <el-button type="primary" v-on:click="selectedPlace = 'Cairns'">Cairns</el-button>
-        </el-row>
-        <el-row>
-            <el-button type="primary" v-on:click="selectedPlace = 'Brisbane'">Brisbane</el-button>
-        </el-row>
-        <el-row>
-            <el-button type="primary" v-on:click="selectedPlace = 'Sydney'">Sydney</el-button>
-        </el-row>
+        <div class="row">
+            <button class="btn btn-default" v-on:click="selectedPlace = 'Cairns'">Cairns</button>
+        </div>
+        <div class="row">
+            <button class="btn btn-default" v-on:click="selectedPlace = 'Brisbane'">Brisbane</button>
+        </div>
+        <div class="row">
+            <button class="btn btn-default" v-on:click="selectedPlace = 'Sydney'">Sydney</button>
+        </div>
     </div>
 </template>
 
@@ -24,8 +24,8 @@
     }
 </script>
 
-<style>
-    .el-row {
+<style scoped>
+    .row {
         margin-top: 10px;
     }
 </style>

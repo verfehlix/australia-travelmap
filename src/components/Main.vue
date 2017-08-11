@@ -1,17 +1,24 @@
 <template>
-    <el-row>
-        <el-col :span="10" id="mapColumn">
-            <div class="grid-content bg-purple">
-                <MapComponent></MapComponent>
-            </div>
-        </el-col>
+    <div>
+        <div class="header">
+            <span>Australia Travelmap 2017</span>
+        </div>
 
-        <el-col :span="14" id="photoColumn">
-            <div class="grid-content bg-purple-light">
-                <PhotoComponent></PhotoComponent>
+        <div class="row splitPanelContainer">
+
+            <div class="col-md-5 no-float">
+                <div class="grid-content bg-left hidden-sm">
+                    <MapComponent></MapComponent>
+                </div>
             </div>
-        </el-col>
-    </el-row>
+
+            <div class="col-md-7 no-float">
+                <div class="grid-content bg-right">
+                    <PhotoComponent></PhotoComponent>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -31,32 +38,31 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    .el-col {
-        border-radius: 4px;
+    .header {
+        background: #123456;
+        height: 100px;
     }
-    .grid-content {
+    .row {
+        height: 100%;
+        display: table-row;
+    }
+    .splitPanelContainer {
+        display:table;
+        width: 100%;
+        margin-top: 0px;
+        padding: 0px 0 0 0;
+        box-sizing: border-box;
+    }
+
+     /* .grid-content {
         border-radius: 4px;
         height: calc(100vh - 52px);
         overflow-y: scroll;
-    }
-    .bg-purple {
+    } */
+    .bg-left {
         background: #d3dce6;
     }
-    .bg-purple-light {
+    .bg-right {
         background: #e5e9f2;
     }
-
-    .CarouselComponent {
-        display: none;
-    }
-
-    @media only screen and (max-width: 768px) {
-        #mapColumn {
-            display: none;
-        }
-         #photoColumn {
-            width: 100vw;
-        }
-    }
-
 </style>
