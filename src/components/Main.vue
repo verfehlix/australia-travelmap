@@ -1,23 +1,25 @@
 <template>
     <div>
-        <div class="header">
-            <span>Australia Travelmap 2017</span>
+        <div class="row header">
+            <div class="col">
+                <span>Australia Travelmap 2017</span>
+            </div>
         </div>
 
-        <div class="row splitPanelContainer">
-
-            <div class="col-md-5 no-float">
+        <div class="row no-gutters splitContainer">
+            <div class="col-5">
                 <div class="grid-content bg-left hidden-sm">
                     <MapComponent></MapComponent>
                 </div>
             </div>
 
-            <div class="col-md-7 no-float">
+            <div class="col-7">
                 <div class="grid-content bg-right">
                     <PhotoComponent></PhotoComponent>
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -39,26 +41,9 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
     .header {
-        background: #123456;
+        background: #FFEEFF;
         height: 100px;
     }
-    .row {
-        height: 100%;
-        display: table-row;
-    }
-    .splitPanelContainer {
-        display:table;
-        width: 100%;
-        margin-top: 0px;
-        padding: 0px 0 0 0;
-        box-sizing: border-box;
-    }
-
-     /* .grid-content {
-        border-radius: 4px;
-        height: calc(100vh - 52px);
-        overflow-y: scroll;
-    } */
     .bg-left {
         background: #d3dce6;
     }
