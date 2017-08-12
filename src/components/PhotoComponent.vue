@@ -11,6 +11,8 @@
                 </div>
             </div>
         </div>
+
+
     </div>
 </template>
 
@@ -33,56 +35,66 @@
 </script>
 
 <style scoped>
+    .row {
+        margin-left: 2em;
+        margin-right: 2em;
+    }
+
     .photoContainer {
-        border-radius: 3px;
-        margin: 10px;
+        /*Copied from http://www.mademyday.de/css-height-equals-width-with-pure-css.html for Thumbnail Ratios*/
+        width: 100%;
+        position: relative;
 
-        width: 200px;
-        height: 150px;
+        /* border-radius: 3px; */
 
-        -webkit-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.5);
+        margin-bottom: 2em;
+
+
+         -webkit-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.5);
         -moz-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.5);
         box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.5);
 
         cursor: pointer;
     }
-    .photo {
-        border-radius: 3px;
 
-        width: 200px;
-        height: 150px;
+    /*Copied from http://www.mademyday.de/css-height-equals-width-with-pure-css.html for Thumbnail Ratios*/
+    .photoContainer:before{
 
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
+        content: "";
+        display: block;
+
+        /*Ratio 1:1*/
+         padding-top: 100%;
+
+        /*Ratio 2:1*/
+        /* padding-top: 50%; */
+
+        /*Ratio 1:2*/
+        /* padding-top: 200%; */
+
+        /*Ratio 4:3*/
+        /* padding-top: 75%; */
+
+        /*Ratio 16:9*/
+        /* padding-top: 56.25%; */
     }
 
-    .carouselBackground {
-        position: absolute;
-        display: block;
-        width: 100%;
-        height: 100%;
+    .photo {
+        /*Copied from http://www.mademyday.de/css-height-equals-width-with-pure-css.html for Thumbnail Ratios*/
+        position:  absolute;
         top: 0;
         left: 0;
-        right: 0;
         bottom: 0;
-        background-color: rgba(0,0,0,0.5);
-        z-index: 2;
-    }
-
-    .carousel {
-        position: absolute;
-        display: block;
-        width: auto;
-        top: 10%;
-        left: 0;
         right: 0;
-        bottom: 0;
-        z-index: 3;
-    }
 
-    .carouselPhoto{
-        height: 100%;
-        width: auto;
+         /* border-radius: 3px; */
+
+         background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+
+          /* image-rendering: -webkit-optimize-contrast; */
+
+
     }
 </style>

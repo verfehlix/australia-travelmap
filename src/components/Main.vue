@@ -7,16 +7,12 @@
         </div>
 
         <div class="row no-gutters splitContainer">
-            <div class="col-5">
-                <div class="grid-content bg-left hidden-sm">
-                    <MapComponent></MapComponent>
-                </div>
+            <div class="col-4 hidden-md-down bg-left">
+                <MapComponent></MapComponent>
             </div>
 
-            <div class="col-7">
-                <div class="grid-content bg-right">
+            <div class="col bg-right">
                     <PhotoComponent></PhotoComponent>
-                </div>
             </div>
         </div>
 
@@ -42,7 +38,6 @@
 <style scoped>
     .header {
         background: #FFEEFF;
-        height: 100px;
     }
     .bg-left {
         background: #d3dce6;

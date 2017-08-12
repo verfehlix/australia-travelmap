@@ -1,14 +1,14 @@
 <template>
     <div class="mapComponent">
         <h1>HERE BE MAPS</h1>
-        <div class="row">
-            <button class="btn btn-default" v-on:click="selectedPlace = 'Cairns'">Cairns</button>
+        <div class="row justify-content-center">
+            <button class="btn btn-primary temp-btn-margin" v-on:click="selectedPlace = 'Cairns'">Cairns</button>
         </div>
-        <div class="row">
-            <button class="btn btn-default" v-on:click="selectedPlace = 'Brisbane'">Brisbane</button>
+        <div class="row justify-content-center">
+            <button class="btn btn-primary temp-btn-margin" v-on:click="selectedPlace = 'Brisbane'">Brisbane</button>
         </div>
-        <div class="row">
-            <button class="btn btn-default" v-on:click="selectedPlace = 'Sydney'">Sydney</button>
+        <div class="row justify-content-center">
+            <button class="btn btn-primary temp-btn-margin" v-on:click="selectedPlace = 'Sydney'">Sydney</button>
         </div>
     </div>
 </template>
@@ -25,7 +25,7 @@
 </script>
 
 <style scoped>
-    .row {
+    .temp-btn-margin {
         margin-top: 10px;
     }
 </style>
