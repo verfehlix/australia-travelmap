@@ -1,18 +1,16 @@
 <template>
     <div>
-        <div class="row header">
-            <div class="col">
-                <span>Australia Travelmap 2017</span>
-            </div>
+        <div class="navbar fixed-top">
+            <span class="navbar-text">Australia Travelmap 2017</span>
         </div>
 
-        <div class="row no-gutters splitContainer">
-            <div class="col-4 hidden-md-down bg-left">
+        <div class="splitContainer row no-gutters">
+            <div class="col-4 hidden-md-down splitPanel-left">
                 <MapComponent></MapComponent>
             </div>
 
-            <div class="col bg-right">
-                    <PhotoComponent></PhotoComponent>
+            <div class="col splitPanel-right">
+                <PhotoComponent></PhotoComponent>
             </div>
         </div>
 
@@ -36,13 +34,16 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    .header {
-        background: #FFEEFF;
+    .splitContainer {
+        margin-top: 54px; /*else navbar lies over content*/
+        max-height: calc(100vh - 54px);
     }
-    .bg-left {
+    .splitPanel-left {
         background: #d3dce6;
     }
-    .bg-right {
-        background: #e5e9f2;
+    .splitPanel-right {
+        background: #BBBBBB;
+        height: calc(100vh - 54px);
+        overflow-y: auto;
     }
 </style>
