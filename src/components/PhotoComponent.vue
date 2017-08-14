@@ -12,11 +12,11 @@
             </div>
         </div>
 
-         <div class="overlayContainer" v-if="showCarousel" v-on:click="photoClick()">
-            <button type="button" class="btn btn-secondary closeButton">Close</button>
+         <div class="overlayContainer" v-if="showCarousel">
+            <button type="button" class="btn btn-secondary closeButton" v-on:click="photoClick(currentImage)">Close</button>
 
-            <button type="button" class="btn btn-secondary previousButton">Previous</button>
-            <button type="button" class="btn btn-secondary nextButton">Next</button>
+            <button type="button" class="btn btn-secondary previousButton" v-on:click="previousButtonClick()">Previous</button>
+            <button type="button" class="btn btn-secondary nextButton" v-on:click="nextButtonClick()">Next</button>
 
             <div class="pictureRow row align-items-center">
                 <!-- <div class="col-1">
@@ -54,6 +54,22 @@
                 // alert(photoName)
                 this.currentImage = photoName
                 this.showCarousel = !this.showCarousel
+            },
+            nextButtonClick: function () {
+                let index = this.photos.indexOf(this.currentImage)
+                if (index === this.photos.length) {
+                    this.currentImage = this.photos[0]
+                } else {
+                    this.currentImage = this.photos[++index]
+                }
+            },
+            previousButtonClick: function () {
+                let index = this.photos.indexOf(this.currentImage)
+                if (index === 0) {
+                    this.currentImage = this.photos[this.photos.length - 1]
+                } else {
+                    this.currentImage = this.photos[--index]
+                }
             }
         }
     }
@@ -61,7 +77,7 @@
 
 <style scoped>
     .overlayImage {
-        max-height: calc(100vh - 20px);
+        max-height: 100vh;
         max-width: 100%;
     }
 
