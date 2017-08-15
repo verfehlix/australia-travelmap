@@ -130,8 +130,12 @@
 
                     if (placeData.id === routePlace) {
                         this.currentPlaceData = placeData
+
+                        return true
                     }
                 }
+
+                return false
             },
             getIndexOfPhotoObject: function (photoObject) {
                 for (let i = 0; i < this.currentPlaceData.photos.length; i++) {
@@ -149,22 +153,34 @@
         mounted: function () {
             // if no photo ID is specified, just load place data and display gallery
             if (this.$route.name === 'Initial-With-Place') {
-                this.setCurrentPlaceDataViaRoute()
+                const placeFound = this.setCurrentPlaceDataViaRoute()
+
+                // error handling if no place was found
+                if (!placeFound) {
+                    this.$router.push({name: 'Initial'})
+                }
+
             // if photo ID is specified, load place & gallery and then display photo in carousel
             } else if (this.$route.name === 'Initial-With-Place-And-Photo-Index') {
-                this.setCurrentPlaceDataViaRoute()
-                const photoObject = this.getPhotoObjectByIndex(this.$route.params.photoIndex)
-                // if index cannot be found, re-route to standard place overview
-                if (photoObject) {
-                    this.currentImage = photoObject
-                    this.showCarousel = true
+                const placeFound = this.setCurrentPlaceDataViaRoute()
+
+                // error handling if no place was found
+                if (!placeFound) {
+                    this.$router.push({name: 'Initial'})
                 } else {
-                    this.$router.push({
-                        name: 'Initial-With-Place',
-                        params: {
-                            place: this.place
-                        }
-                    })
+                    const photoObject = this.getPhotoObjectByIndex(this.$route.params.photoIndex)
+                    // error handling if no photo with id was was not found
+                    if (photoObject) {
+                        this.currentImage = photoObject
+                        this.showCarousel = true
+                    } else {
+                        this.$router.push({
+                            name: 'Initial-With-Place',
+                            params: {
+                                place: this.place
+                            }
+                        })
+                    }
                 }
             }
         },
