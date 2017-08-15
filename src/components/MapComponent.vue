@@ -28,8 +28,6 @@
 </script>
 
 <style scoped>
-    .mapComponent {
-    }
     .temp-btn-margin {
         margin-top: 10px;
     }
