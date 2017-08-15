@@ -5,10 +5,10 @@
         <span>{{ this.currentPlaceData.description }}</span>
 
         <div class="carouselContainer" v-if="showCarousel">
-            <button type="button" class="btn btn-secondary closeButton" v-on:click="photoClick(currentImage)">X</button>
+            <button type="button" class="btn btn-secondary closeButton" v-on:click="closeCarousel()">X</button>
 
-            <button type="button" class="btn btn-secondary previousButton" v-on:click="previousButtonClick()"><</button>
-            <button type="button" class="btn btn-secondary nextButton" v-on:click="nextButtonClick()">></button>
+            <button type="button" class="btn btn-secondary previousButton" v-on:click="carouselNavButtonClick('prev')"><</button>
+            <button type="button" class="btn btn-secondary nextButton" v-on:click="carouselNavButtonClick('next')">></button>
 
              <div class="carouselPhotoRow row align-items-center">
                 <div class="col">
@@ -61,27 +61,56 @@
             }
         },
         methods: {
-            photoClick: function (photoName) {
-                this.currentImage = photoName
-                this.showCarousel = !this.showCarousel
+            photoClick: function (photo) {
+                this.currentImage = photo
+                this.showCarousel = true
+                this.$router.push({
+                    name: 'Initial-With-Place-And-Photo-Index',
+                    params: {
+                        place: this.place,
+                        photoIndex: this.getIndexOfPhotoObject(this.currentImage)
+                    }
+                })
             },
-            nextButtonClick: function () {
-                let index = this.getIndexOfPhotoObject(this.currentPlaceData.photos, this.currentImage)
-                if (index === this.currentPlaceData.photos.length - 1) {
-                    this.currentImage = this.currentPlaceData.photos[0]
-                } else {
-                    this.currentImage = this.currentPlaceData.photos[++index]
-                }
-                this.currentAnimation = this.animations.nextImage
+            closeCarousel: function () {
+                this.showCarousel = false
+                this.$router.push({
+                    name: 'Initial-With-Place',
+                    params: {
+                        place: this.place
+                    }
+                })
             },
-            previousButtonClick: function () {
-                let index = this.getIndexOfPhotoObject(this.currentPlaceData.photos, this.currentImage)
-                if (index === 0) {
-                    this.currentImage = this.currentPlaceData.photos[this.currentPlaceData.photos.length - 1]
-                } else {
-                    this.currentImage = this.currentPlaceData.photos[--index]
+            carouselNavButtonClick: function (direction) {
+                const index = this.getIndexOfPhotoObject(this.currentImage)
+                let newIndex
+
+                if (direction === 'next') {
+                    this.currentAnimation = this.animations.nextImage
+
+                    if (index < this.currentPlaceData.photos.length - 1) {
+                        newIndex = index + 1
+                    } else {
+                        newIndex = 0
+                    }
+                } else if (direction === 'prev') {
+                    this.currentAnimation = this.animations.prevImage
+
+                    if (index > 0) {
+                        newIndex = index - 1
+                    } else {
+                        newIndex = this.currentPlaceData.photos.length - 1
+                    }
                 }
-                this.currentAnimation = this.animations.prevImage
+
+                this.currentImage = this.currentPlaceData.photos[newIndex]
+                this.$router.push({
+                    name: 'Initial-With-Place-And-Photo-Index',
+                    params: {
+                        place: this.place,
+                        photoIndex: newIndex
+                    }
+                })
             },
             setCurrentPlaceDataViaRoute: function () {
                 const routePlace = this.place
@@ -94,18 +123,40 @@
                     }
                 }
             },
-            getIndexOfPhotoObject: function (array, photoObject) {
-                for (let i = 0; i < array.length; i++) {
-                    if (array[i].fileName === photoObject.fileName) {
+            getIndexOfPhotoObject: function (photoObject) {
+                for (let i = 0; i < this.currentPlaceData.photos.length; i++) {
+                    if (this.currentPlaceData.photos[i].fileName === photoObject.fileName) {
                         return i
                     }
                 }
 
                 return -1
+            },
+            getPhotoObjectByIndex: function (index) {
+                return this.currentPlaceData.photos[index]
             }
         },
         mounted: function () {
-            this.setCurrentPlaceDataViaRoute()
+            // if no photo ID is specified, just load place data and display gallery
+            if (this.$route.name === 'Initial-With-Place') {
+                this.setCurrentPlaceDataViaRoute()
+            // if photo ID is specified, load place & gallery and then display photo in carousel
+            } else if (this.$route.name === 'Initial-With-Place-And-Photo-Index') {
+                this.setCurrentPlaceDataViaRoute()
+                const photoObject = this.getPhotoObjectByIndex(this.$route.params.photoIndex)
+                // if index cannot be found, re-route to standard place overview
+                if (photoObject) {
+                    this.currentImage = photoObject
+                    this.showCarousel = true
+                } else {
+                    this.$router.push({
+                        name: 'Initial-With-Place',
+                        params: {
+                            place: this.place
+                        }
+                    })
+                }
+            }
         },
         watch: {
             '$route' (to, from) {

@@ -17,6 +17,12 @@ export default new Router({
             path: '/:place',
             name: 'Initial-With-Place',
             component: Main
+        },
+
+        {
+            path: '/:place/:photoIndex',
+            name: 'Initial-With-Place-And-Photo-Index',
+            component: Main
         }
     ]
 })
