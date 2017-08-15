@@ -13,25 +13,15 @@
         </div>
 
          <div class="overlayContainer" v-if="showCarousel">
-            <button type="button" class="btn btn-secondary closeButton" v-on:click="photoClick(currentImage)">Close</button>
+            <button type="button" class="btn btn-secondary closeButton" v-on:click="photoClick(currentImage)">X</button>
 
-            <button type="button" class="btn btn-secondary previousButton" v-on:click="previousButtonClick()">Previous</button>
-            <button type="button" class="btn btn-secondary nextButton" v-on:click="nextButtonClick()">Next</button>
+            <button type="button" class="btn btn-secondary previousButton" v-on:click="previousButtonClick()"><</button>
+            <button type="button" class="btn btn-secondary nextButton" v-on:click="nextButtonClick()">></button>
 
-            <div class="pictureRow row align-items-center">
-                <!-- <div class="col-1">
-                    <button type="button" class="btn btn-secondary">Back</button>
-                </div> -->
-                <div class="col">
-                     <!-- <div class="row align-items-center">
-                         <div class="col"> -->
-                            <img class="overlayImage" v-bind:src="require('@/assets/sydney/' + currentImage)"/>
-                         <!-- </div>
-                    </div> -->
-                </div>
-                <!-- <div class="col-1">
-                    <button type="button" class="btn btn-secondary">Next</button>
-                </div> -->
+             <div class="pictureRow row align-items-center">
+                <div class="col overlayImageColumn">
+                    <img class="overlayImage" v-bind:src="require('@/assets/sydney/' + currentImage)"/>
+                 </div>
             </div>
         </div>
 
@@ -77,8 +67,13 @@
 
 <style scoped>
     .overlayImage {
+        padding: 20px;
         max-height: 100vh;
         max-width: 100%;
+    }
+
+    .overlayImageColumn {
+        padding: 2.4em;
     }
 
     .closeButton {
