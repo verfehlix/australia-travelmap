@@ -4,13 +4,13 @@
 
         <div class="buttons">
             <div class="row justify-content-center">
-                <button class="btn btn-primary temp-btn-margin" v-on:click="selectedPlace = 'Cairns'">Cairns</button>
+                <button class="btn btn-primary temp-btn-margin" v-on:click="handlePlaceButtonClick('cairns')">Cairns</button>
             </div>
             <div class="row justify-content-center">
-                <button class="btn btn-primary temp-btn-margin" v-on:click="selectedPlace = 'Brisbane'">Brisbane</button>
+                <button class="btn btn-primary temp-btn-margin" v-on:click="handlePlaceButtonClick('brisbane')">Brisbane</button>
             </div>
             <div class="row justify-content-center">
-                <button class="btn btn-primary temp-btn-margin" v-on:click="selectedPlace = 'Sydney'">Sydney</button>
+                <button class="btn btn-primary temp-btn-margin" v-on:click="handlePlaceButtonClick('sydney')">Sydney</button>
             </div>
         </div>
     </div>
@@ -22,6 +22,16 @@
         data () {
             return {
                 selectedPlace: 'Sydney'
+            }
+        },
+        methods: {
+            handlePlaceButtonClick: function (place) {
+                this.$router.push({
+                    name: 'Initial-With-Place',
+                    params: {
+                        place: place
+                    }
+                })
             }
         }
     }

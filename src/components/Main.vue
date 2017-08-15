@@ -6,11 +6,11 @@
 
         <div class="splitContainer row no-gutters">
             <div class="col-4 hidden-md-down splitPanel-left">
-                <MapComponent></MapComponent>
+                <MapComponent v-bind:place="$route.params.place"></MapComponent>
             </div>
 
             <div class="col splitPanel-right">
-                <PhotoComponent></PhotoComponent>
+                <PhotoComponent v-bind:place="$route.params.place"></PhotoComponent>
             </div>
         </div>
 
@@ -33,7 +33,8 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
     .splitContainer {
-        margin-top: 54px; /*else navbar lies over content*/
+        /* Prevent Navbar from lying over content */
+        margin-top: 54px;
         max-height: calc(100vh - 54px);
     }
     .splitPanel-left {

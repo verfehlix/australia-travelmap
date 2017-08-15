@@ -1,15 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
-import Lightbox from '@/components/Lightbox'
 
 Vue.use(Router)
 
 export default new Router({
     routes: [
+        /* Start route, currenty it still shows sydney, but this should show something like "please select a place on the map" on the photocomponent side*/
         {
             path: '/',
-            name: 'Main',
+            name: 'Initial',
+            component: Main
+        },
+        /* Route that map markers / temp-buttons will lead to --> change displayed photos depending on selected place*/
+        {
+            path: '/:place',
+            name: 'Initial-With-Place',
             component: Main
         }
     ]

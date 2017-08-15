@@ -1,8 +1,8 @@
 <template>
     <div class="photoComponent">
 
-        <h1>Sydney</h1>
-        <span>Sydney [ˈsɪdni] ist die Hauptstadt des australischen Bundesstaates New South Wales und mit 5 Millionen Einwohnern[1] die größte Stadt in Australien.[2] Sydney wurde am 26. Januar 1788 gegründet und ist heute das Industrie-, Handels- und Finanzzentrum Australiens und ein wichtiger Tourismusort. Auch zahlreiche Universitäten, Museen und Galerien befinden sich hier. Sydney ist römisch-katholischer und anglikanischer Erzbischofssitz.</span>
+        <h1>{{ this.currentPlaceData.name }}</h1>
+        <span>{{ this.currentPlaceData.description }}</span>
 
         <div class="carouselContainer" v-if="showCarousel">
             <button type="button" class="btn btn-secondary closeButton" v-on:click="photoClick(currentImage)">X</button>
@@ -18,16 +18,16 @@
                         v-bind:enter-active-class="currentAnimation.enterActive"
                         v-bind:leave-active-class="currentAnimation.leaveActive"
                     >
-                        <img class="carouselPhoto" v-bind:src="require('@/assets/sydney/' + currentImage)" v-bind:key="require('@/assets/sydney/' + currentImage)"/>
+                        <img class="carouselPhoto" v-bind:src="require('@/assets/sydney/' + currentImage.fileName)" v-bind:key="require('@/assets/sydney/' + currentImage.fileName)"/>
                     </transition>
                 </div>
             </div>
         </div>
 
         <div class="row galleryRow">
-            <div class="gallery col-xs-6 col-sm-3 col-md-3 col-lg-3" v-for="fileName in photos" :key="fileName">
+            <div class="gallery col-xs-6 col-sm-3 col-md-3 col-lg-3" v-for="photo in currentPlaceData.photos" :key="photo.fileName">
                 <div class="photoContainer">
-                    <div v-on:click="photoClick(fileName)" class="photo" :style="{ 'background-image': 'url(' + require('@/assets/sydney/' + fileName) + ')' }"></div>
+                    <div v-on:click="photoClick(photo)" class="photo" :style="{ 'background-image': 'url(' + require('@/assets/sydney/' + photo.fileName) + ')' }"></div>
                 </div>
             </div>
         </div>
@@ -35,24 +35,29 @@
 </template>
 
 <script>
+    import travelData from '@/assets/travelData.json'
+
     export default {
         name: 'photo',
+        props: ['place'],
         data () {
             return {
                 showCarousel: false,
-                currentImage: '',
+                currentImage: {},
                 photos: ['DSC03096.jpg', 'DSC00012.jpg', 'DSC_2616.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg'],
                 currentAnimation: {},
                 animations: {
                     nextImage: {
-                        enterActive: 'animated fadeInRight',
-                        leaveActive: 'animated fadeOutLeft'
+                        enterActive: 'animated fadeInRight', // animation for the new image
+                        leaveActive: 'animated fadeOutLeft'  // animation for the old image
                     },
                     prevImage: {
-                        enterActive: 'animated fadeInLeft',
-                        leaveActive: 'animated fadeOutRight'
+                        enterActive: 'animated fadeInLeft',  // animation for the new image
+                        leaveActive: 'animated fadeOutRight' // animation for the old image
                     }
-                }
+                },
+                travelData,
+                currentPlaceData: {}
             }
         },
         methods: {
@@ -61,22 +66,50 @@
                 this.showCarousel = !this.showCarousel
             },
             nextButtonClick: function () {
-                let index = this.photos.indexOf(this.currentImage)
-                if (index === this.photos.length) {
-                    this.currentImage = this.photos[0]
+                let index = this.getIndexOfPhotoObject(this.currentPlaceData.photos, this.currentImage)
+                if (index === this.currentPlaceData.photos.length - 1) {
+                    this.currentImage = this.currentPlaceData.photos[0]
                 } else {
-                    this.currentImage = this.photos[++index]
+                    this.currentImage = this.currentPlaceData.photos[++index]
                 }
                 this.currentAnimation = this.animations.nextImage
             },
             previousButtonClick: function () {
-                let index = this.photos.indexOf(this.currentImage)
+                let index = this.getIndexOfPhotoObject(this.currentPlaceData.photos, this.currentImage)
                 if (index === 0) {
-                    this.currentImage = this.photos[this.photos.length - 1]
+                    this.currentImage = this.currentPlaceData.photos[this.currentPlaceData.photos.length - 1]
                 } else {
-                    this.currentImage = this.photos[--index]
+                    this.currentImage = this.currentPlaceData.photos[--index]
                 }
                 this.currentAnimation = this.animations.prevImage
+            },
+            setCurrentPlaceDataViaRoute: function () {
+                const routePlace = this.place
+
+                for (let i = 0; i < this.travelData.places.length; i++) {
+                    const placeData = this.travelData.places[i]
+
+                    if (placeData.id === routePlace) {
+                        this.currentPlaceData = placeData
+                    }
+                }
+            },
+            getIndexOfPhotoObject: function (array, photoObject) {
+                for (let i = 0; i < array.length; i++) {
+                    if (array[i].fileName === photoObject.fileName) {
+                        return i
+                    }
+                }
+
+                return -1
+            }
+        },
+        mounted: function () {
+            this.setCurrentPlaceDataViaRoute()
+        },
+        watch: {
+            '$route' (to, from) {
+                this.setCurrentPlaceDataViaRoute()
             }
         }
     }
