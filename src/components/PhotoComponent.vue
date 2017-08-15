@@ -1,5 +1,6 @@
 <template>
     <div class="photoComponent">
+        <link href="https://unpkg.com/animate.css@3.5.1/animate.min.css" rel="stylesheet" type="text/css">
 
         <h1>Sydney</h1>
         <span>Sydney [ˈsɪdni] ist die Hauptstadt des australischen Bundesstaates New South Wales und mit 5 Millionen Einwohnern[1] die größte Stadt in Australien.[2] Sydney wurde am 26. Januar 1788 gegründet und ist heute das Industrie-, Handels- und Finanzzentrum Australiens und ein wichtiger Tourismusort. Auch zahlreiche Universitäten, Museen und Galerien befinden sich hier. Sydney ist römisch-katholischer und anglikanischer Erzbischofssitz.</span>
@@ -19,9 +20,16 @@
             <button type="button" class="btn btn-secondary nextButton" v-on:click="nextButtonClick()">></button>
 
              <div class="pictureRow row align-items-center">
-                <div class="col overlayImageColumn">
-                    <img class="overlayImage" v-bind:src="require('@/assets/sydney/' + currentImage)"/>
-                 </div>
+                <div class="col">
+                    <transition
+                        name="custom-classes-transition"
+                        mode="out-in"
+                        v-bind:enter-active-class="currentAnimation.enterActive"
+                        v-bind:leave-active-class="currentAnimation.leaveActive"
+                    >
+                        <img class="overlayImage" v-bind:src="require('@/assets/sydney/' + currentImage)" v-bind:key="require('@/assets/sydney/' + currentImage)"/>
+                    </transition>
+                </div>
             </div>
         </div>
 
@@ -36,7 +44,18 @@
             return {
                 showCarousel: false,
                 currentImage: '',
-                photos: ['DSC03096.jpg', 'DSC00012.jpg', 'DSC_2616.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg']
+                photos: ['DSC03096.jpg', 'DSC00012.jpg', 'DSC_2616.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg'],
+                currentAnimation: {},
+                animations: {
+                    nextImage: {
+                        enterActive: 'animated fadeInRight',
+                        leaveActive: 'animated fadeOutLeft'
+                    },
+                    prevImage: {
+                        enterActive: 'animated fadeInLeft',
+                        leaveActive: 'animated fadeOutRight'
+                    }
+                }
             }
         },
         methods: {
@@ -52,6 +71,7 @@
                 } else {
                     this.currentImage = this.photos[++index]
                 }
+                this.currentAnimation = this.animations.nextImage
             },
             previousButtonClick: function () {
                 let index = this.photos.indexOf(this.currentImage)
@@ -60,20 +80,45 @@
                 } else {
                     this.currentImage = this.photos[--index]
                 }
+                this.currentAnimation = this.animations.prevImage
             }
         }
     }
 </script>
 
 <style scoped>
-    .overlayImage {
-        padding: 20px;
-        max-height: 100vh;
-        max-width: 100%;
+
+/* ANIMATIONS  */
+    .fadeInRight {
+        -webkit-animation-name: fadeInRight;
+        animation-name: fadeInRight;
+        -webkit-animation-duration: .5s;
+        animation-duration: .5s;
+    }
+    .fadeOutLeft {
+        -webkit-animation-name: fadeOutLeft;
+        animation-name: fadeOutLeft;
+        -webkit-animation-duration: .5s;
+        animation-duration: .5s;
     }
 
-    .overlayImageColumn {
-        padding: 2.4em;
+    .fadeOutRight {
+        -webkit-animation-name: fadeInRight;
+        animation-name: fadeInRight;
+        -webkit-animation-duration: .5s;
+        animation-duration: .5s;
+    }
+    .fadeInLeft {
+        -webkit-animation-name: fadeOutLeft;
+        animation-name: fadeOutLeft;
+        -webkit-animation-duration: .5s;
+        animation-duration: .5s;
+    }
+
+    .overlayImage {
+         padding: 2.4em;
+        max-height: 100vh;
+        max-width: 100%;
     }
 
     .closeButton {
