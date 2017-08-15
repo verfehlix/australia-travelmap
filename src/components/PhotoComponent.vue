@@ -1,33 +1,44 @@
 <template>
     <div class="photoComponent">
-
-        <h1>{{ this.currentPlaceData.name }}</h1>
-        <span>{{ this.currentPlaceData.description }}</span>
-
-        <div class="carouselContainer" v-if="showCarousel">
-            <button type="button" class="btn btn-secondary closeButton" v-on:click="closeCarousel()">X</button>
-
-            <button type="button" class="btn btn-secondary previousButton" v-on:click="carouselNavButtonClick('prev')"><</button>
-            <button type="button" class="btn btn-secondary nextButton" v-on:click="carouselNavButtonClick('next')">></button>
-
-             <div class="carouselPhotoRow row align-items-center">
-                <div class="col">
-                    <transition
-                        name="custom-classes-transition"
-                        mode="out-in"
-                        v-bind:enter-active-class="currentAnimation.enterActive"
-                        v-bind:leave-active-class="currentAnimation.leaveActive"
-                    >
-                        <img class="carouselPhoto" v-bind:src="require('@/assets/sydney/' + currentImage.fileName)" v-bind:key="require('@/assets/sydney/' + currentImage.fileName)"/>
-                    </transition>
-                </div>
-            </div>
+        <!-- In case no place is selected / in route, display hint -->
+        <div class="hint" v-if="!this.place">
+            <span>Please select a place on the left to view photos. :-)</span>
         </div>
 
-        <div class="row galleryRow">
-            <div class="gallery col-xs-6 col-sm-3 col-md-3 col-lg-3" v-for="photo in currentPlaceData.photos" :key="photo.fileName">
-                <div class="photoContainer">
-                    <div v-on:click="photoClick(photo)" class="photo" :style="{ 'background-image': 'url(' + require('@/assets/sydney/' + photo.fileName) + ')' }"></div>
+        <!-- Display normal gallery if place is selected / in route -->
+        <div v-if="this.place">
+
+            <!-- Info Stuff, Title and Description  -->
+            <h1>{{ this.currentPlaceData.name }}</h1>
+            <span>{{ this.currentPlaceData.description }}</span>
+
+            <!-- Carousel  -->
+            <div class="carouselContainer" v-if="showCarousel">
+                <button type="button" class="btn btn-secondary closeButton" v-on:click="closeCarousel()">X</button>
+
+                <button type="button" class="btn btn-secondary previousButton" v-on:click="carouselNavButtonClick('prev')"><</button>
+                <button type="button" class="btn btn-secondary nextButton" v-on:click="carouselNavButtonClick('next')">></button>
+
+                <div class="carouselPhotoRow row align-items-center">
+                    <div class="col">
+                        <transition
+                            name="custom-classes-transition"
+                            mode="out-in"
+                            v-bind:enter-active-class="currentAnimation.enterActive"
+                            v-bind:leave-active-class="currentAnimation.leaveActive"
+                        >
+                            <img class="carouselPhoto" v-bind:src="require('@/assets/sydney/' + currentImage.fileName)" v-bind:key="require('@/assets/sydney/' + currentImage.fileName)"/>
+                        </transition>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery  -->
+            <div class="row galleryRow">
+                <div class="gallery col-xs-6 col-sm-3 col-md-3 col-lg-3" v-for="photo in currentPlaceData.photos" :key="photo.fileName">
+                    <div class="photoContainer">
+                        <div v-on:click="photoClick(photo)" class="photo" :style="{ 'background-image': 'url(' + require('@/assets/sydney/' + photo.fileName) + ')' }"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,10 +53,10 @@
         props: ['place'],
         data () {
             return {
-                showCarousel: false,
+                travelData,
+                currentPlaceData: {},
                 currentImage: {},
-                photos: ['DSC03096.jpg', 'DSC00012.jpg', 'DSC_2616.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg', 'DSC00012.jpg', 'DSC00067.jpg', 'DSC00120.jpg', 'DSC09891.jpg', 'DSC09906.jpg', 'DSC09946.jpg'],
-                currentAnimation: {},
+                showCarousel: false,
                 animations: {
                     nextImage: {
                         enterActive: 'animated fadeInRight', // animation for the new image
@@ -56,8 +67,7 @@
                         leaveActive: 'animated fadeOutRight' // animation for the old image
                     }
                 },
-                travelData,
-                currentPlaceData: {}
+                currentAnimation: {}
             }
         },
         methods: {
@@ -332,5 +342,13 @@
         -moz-transform: scale(1.1);
         -webkit-transform: scale(1.1);
         transform: scale(1.1);
+    }
+
+/* PHOTO */
+/*-------*/
+    .hint {
+        padding-top: 50%;
+        opacity: 0.75;
+        font-size: 24pt;
     }
 </style>
