@@ -4,6 +4,7 @@ import Vue from 'vue'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'animate.css'
+import 'font-awesome/css/font-awesome.css'
 
 import App from './App'
 import router from './router'

@@ -16,10 +16,12 @@
 
             <!-- Carousel  -->
             <div class="carouselContainer" v-if="showCarousel">
-                <button type="button" class="btn btn-secondary closeButton" v-on:click="closeCarousel()">X</button>
 
-                <button type="button" class="btn btn-secondary previousButton" v-on:click="carouselNavButtonClick('prev')"><</button>
-                <button type="button" class="btn btn-secondary nextButton" v-on:click="carouselNavButtonClick('next')">></button>
+                <div class="fa fa-lg fa-times fa-inverse carouselButton closeButton" v-on:click="closeCarousel()"></div>
+
+                <div class="fa fa-lg fa-chevron-left fa-inverse carouselButton previousButton" v-on:click="carouselNavButtonClick('prev')"></div>
+
+                <div class="fa fa-lg fa-chevron-right fa-inverse carouselButton nextButton" v-on:click="carouselNavButtonClick('next')"></div>
 
                 <div class="carouselPhotoRow row align-items-center">
                     <div class="col">
@@ -208,7 +210,9 @@
     margin-left: 0.5em;
     margin-bottom: 0.25em;
 
-    background: #ECF0F1;
+    background: #EEEEEE;
+    /* background-image: url("../assets/wavegrid/wavegrid_@2X.png");
+    background-repeat:repeat; */
 
     /* border: 1px solid green; */
 }
@@ -238,7 +242,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(0, 0, 0, 0.75);
+        background-color: rgba(0, 0, 0, 0.8);
         z-index:9998;
         text-align: center;
     }
@@ -283,6 +287,12 @@
 
 /* CAROUSEL BUTTONS */
 /*------------------*/
+    .carouselButton {
+        /* border: 1px solid red; */
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.3);
+    }
+
     .closeButton {
         position: absolute;
         top: 0;
@@ -296,6 +306,11 @@
         left:0;
         margin-left: 10px;
         z-index:9999;
+
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 10px;
+        padding-right: 12px;
     }
     .nextButton {
         position: absolute;
@@ -303,6 +318,11 @@
         right:0;
         margin-right: 10px;
         z-index:9999;
+
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 12px;
+        padding-right: 10px;
     }
 
 /* PHOTO GALLERY */
