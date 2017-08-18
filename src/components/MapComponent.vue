@@ -1,29 +1,22 @@
 <template>
     <div class='mapComponent'>
-        <h1>HERE BE MAPS</h1>
-
         <div class='buttons'>
-            <div class='row justify-content-center'>
-                <button class='btn btn-primary temp-btn-margin' v-on:click="handlePlaceButtonClick('cairns')">Cairns</button>
-                <button class='btn btn-primary temp-btn-margin' v-on:click="handlePlaceButtonClick('brisbane')">Brisbane</button>
-                <button class='btn btn-primary temp-btn-margin' v-on:click="handlePlaceButtonClick('sydney')">Sydney</button>
-            </div>
             <div class='row justify-content-center'>
                 <div class='col align-middle'>
                     <gmap-map class='gmap' ref='gmap'
                     :center='{lat:-33.865143, lng:151.209900}'
-                    :zoom='8'
+                    :zoom='10'
                     :options='mapOptions'
                     map-type-id='terrain'>
 
-                        <!-- Sydney -->
-                        <gmap-marker :position='{lat:-33.865143, lng:151.209900}' v-on:click="handlePlaceButtonClick('cairns')">
-                        </gmap-marker>
-
-                        <!-- NewCastle -->
-                        <gmap-marker :position='{lat:-32.926696, lng:151.778892}' v-on:click="handlePlaceButtonClick('cairns')">
-                        </gmap-marker>
-
+                        <gmap-marker
+                            v-for="(place, index) in travelData.places"
+                            :key="index"
+                            :position="place.coordinates"
+                            :clickable="true"
+                            :draggable="true"
+                            @click="handlePlaceButtonClick(place)"
+                        ></gmap-marker>
 
                     </gmap-map>
                 </div>
@@ -33,10 +26,13 @@
 </template>
 
 <script>
+    import travelData from '@/assets/travelData.json'
+
     export default {
         name: 'map',
         data () {
             return {
+                travelData,
                 selectedPlace: 'Sydney',
                 mapOptions: {
                     // draggable: false,
@@ -112,12 +108,42 @@
         methods: {
             handlePlaceButtonClick: function (place) {
                 // replace with own pan function (with easing) https://codepen.io/ErDmKo/pen/Jdpmzv
-                this.$refs.gmap.panTo({lat: -32.926696, lng: 151.778892})
+                this.$refs.gmap.panTo(place.coordinates)
 
                 this.$router.push({
                     name: 'Initial-With-Place',
                     params: {
-                        place: place
+                        place: place.id
+                    }
+                })
+
+                // this.drawRouteFromAtoB('x', 'y')
+            },
+            drawRouteFromAtoB: function (placeA, placeB) {
+                /* eslint-disable no-undef */
+                this.directionsService = new google.maps.DirectionsService()
+
+                const rendererOptions = {
+                    suppressMarkers: true,
+                    suppressInfoWindows: true,
+                    preserveViewport: true
+                }
+
+                this.directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions)
+                /* eslint-enable no-undef */
+
+                this.directionsDisplay.setMap(this.$refs.gmap.$mapObject)
+
+                const vm = this
+                vm.directionsService.route({
+                    origin: {lat: -33.865143, lng: 151.209900},
+                    destination: {lat: -32.926696, lng: 151.778892},
+                    travelMode: 'DRIVING'
+                }, function (response, status) {
+                    if (status === 'OK') {
+                        vm.directionsDisplay.setDirections(response)
+                    } else {
+                        alert('Directions request failed due to ' + status)
                     }
                 })
             }
@@ -126,11 +152,7 @@
 </script>
 
 <style scoped>
-    .temp-btn-margin {
-        margin: 10px;
-    }
-
     .gmap {
-        height: calc(100vh - 165px);
+        height: calc(100vh - 54px);
     }
 </style>

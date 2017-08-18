@@ -2,6 +2,7 @@
     "places": [
         {
             "id": "sydney",
+            "order": "0",
             "name": "Sydney",
             "description": "Sydney ist die Hauptstadt des australischen Bundesstaates New South Wales und mit 5 Millionen Einwohnern die größte Stadt in Australien. Sydney wurde am 26. Januar 1788 gegründet und ist heute das Industrie-, Handels- und Finanzzentrum Australiens und ein wichtiger Tourismusort. Auch zahlreiche Universitäten, Museen und Galerien befinden sich hier. Sydney ist römisch-katholischer und anglikanischer Erzbischofssitz.",
             "coordinates": {
@@ -20,12 +21,33 @@
             ]
         },
         {
-            "id": "cairns",
-            "name": "Cairns",
-            "description": "Cairns war auch ganz cool!",
+            "id": "centralcoast",
+            "order": "1",
+            "name": "Central Coast",
+            "description": "CENTRAL WUHUU!",
             "coordinates": {
-                "lat": -33.865143,
-                "lng": 151.209900
+                "lat": -33.368384,
+                "lng": 151.474857
+            },
+            "photos": [
+                {
+                    "fileName": "DSC00120.jpg",
+                    "description" : "Waterfall along the Kuranda Scenic Railway Trail"
+                },
+                {
+                    "fileName": "DSC00012.jpg",
+                    "description" : "Sydney Opera House at dusk"
+                }
+            ]
+        },
+        {
+            "id": "newcastle",
+            "order": "2",
+            "name": "Newcastle",
+            "description": "Newcastle war auch ganz cool!",
+            "coordinates": {
+                "lat":-32.926696,
+                "lng":151.778892
             },
             "photos": [
                 {
