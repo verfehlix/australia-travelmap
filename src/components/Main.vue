@@ -54,22 +54,24 @@
     }
     .splitPanel-left {
         margin-left: 2em;
+        margin-right: 0.5em;
 
         margin-top: 2em;
         margin-bottom: 2em;
 
-        border: 1px solid red;
+        /* border: 1px solid red; */
     }
     .splitPanel-right {
         height: calc(100vh - 54px - 4em);
-        overflow-y: auto;
+        overflow-y: scroll;
 
         margin-right: 2em;
+        margin-left: 0.5em;
 
         margin-top: 2em;
         margin-bottom: 2em;
 
 
-        border: 1px solid blue;
+        /* border: 1px solid blue; */
     }
 </style>

@@ -210,7 +210,7 @@
 
     background: #ECF0F1;
 
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 
 .placeName {
@@ -309,10 +309,10 @@
 /*---------------*/
     .galleryRow {
         /* Margins same as gutter size for the outer edges of the grid*/
-        margin-left: 0.25em;
         margin-right: 0.25em;
+        margin-left: 0.25em;
 
-        border: 1px solid #ff05e5;
+        /* border: 1px solid #ff05e5; */
     }
 
     .gallery, .col-xs-6, .col-sm-4, .col-md-4, .col-lg-3 {
@@ -348,7 +348,7 @@
         display: block;
 
         /*Ratio 1:1*/
-         padding-top: 100%;
+        padding-top: 100%;
 
         /*Ratio 2:1*/
         /* padding-top: 50%; */
