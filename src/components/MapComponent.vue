@@ -26,6 +26,19 @@
 </template>
 
 <script>
+    import Vue from 'vue'
+    import * as VueGoogleMaps from 'vue2-google-maps'
+
+    Vue.use(VueGoogleMaps, {
+        load: {
+            key: 'AIzaSyCYDsC1hsS1WuBBWceVWhba3OuatvZ79qI',
+            libraries: 'places' // This is required if you use the Autocomplete plugin
+            // OR: libraries: 'places,drawing'
+            // OR: libraries: 'places,drawing,visualization'
+            // (as you require)
+        }
+    })
+
     import travelData from '@/assets/travelData.json'
 
     export default {
@@ -33,11 +46,11 @@
         data () {
             return {
                 travelData,
-                selectedPlace: 'Sydney',
+                directionRendererArray: [],
                 mapOptions: {
                     // draggable: false,
                     clickableIcons: false,
-                    fullscreenControl: false,
+                    // fullscreenControl: false,
                     keyboardShortcuts: false,
                     mapTypeControl: false,
                     panControl: false,
@@ -116,37 +129,52 @@
                         place: place.id
                     }
                 })
-
-                // this.drawRouteFromAtoB('x', 'y')
             },
             drawRouteFromAtoB: function (placeA, placeB) {
-                /* eslint-disable no-undef */
-                this.directionsService = new google.maps.DirectionsService()
-
                 const rendererOptions = {
                     suppressMarkers: true,
                     suppressInfoWindows: true,
                     preserveViewport: true
                 }
 
-                this.directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions)
+                /* eslint-disable no-undef */
+                if (!this.directionsService) {
+                    this.directionsService = new google.maps.DirectionsService()
+                }
+                const newIndex = this.directionRendererArray.push(new google.maps.DirectionsRenderer(rendererOptions)) - 1
                 /* eslint-enable no-undef */
 
-                this.directionsDisplay.setMap(this.$refs.gmap.$mapObject)
+                const currentDirectionsDisplay = this.directionRendererArray[newIndex]
 
-                const vm = this
-                vm.directionsService.route({
-                    origin: {lat: -33.865143, lng: 151.209900},
-                    destination: {lat: -32.926696, lng: 151.778892},
+                currentDirectionsDisplay.setMap(this.$refs.gmap.$mapObject)
+
+                this.directionsService.route({
+                    origin: placeA.coordinates,
+                    destination: placeB.coordinates,
                     travelMode: 'DRIVING'
                 }, function (response, status) {
                     if (status === 'OK') {
-                        vm.directionsDisplay.setDirections(response)
+                        currentDirectionsDisplay.setDirections(response)
                     } else {
                         alert('Directions request failed due to ' + status)
                     }
                 })
+            },
+            drawAllRoutes: function () {
+                for (let i = 0; i < this.travelData.places.length - 1; i++) {
+                    const currentPlace = this.travelData.places[i]
+                    const nextPlace = this.travelData.places[i + 1]
+
+                    this.drawRouteFromAtoB(currentPlace, nextPlace)
+                }
             }
+        },
+        mounted: function () {
+            VueGoogleMaps.loaded.then(() => {
+                setTimeout(() => {
+                    this.drawAllRoutes()
+                }, 100)
+            })
         }
     }
 </script>
