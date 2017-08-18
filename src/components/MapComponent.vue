@@ -58,7 +58,7 @@
                     scaleControl: false,
                     streetViewControl: false,
                     zoomControl: false,
-                    // scrollwheel: false,
+                    scrollwheel: false,
                     styles: [
                         // see here: https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapTypeStyle
                         // {
@@ -181,6 +181,6 @@
 
 <style scoped>
     .gmap {
-        height: calc(100vh - 54px);
+        height: calc(100vh - 56px - 4em);
     }
 </style>

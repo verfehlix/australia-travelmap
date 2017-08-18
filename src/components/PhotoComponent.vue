@@ -9,8 +9,10 @@
         <div v-if="this.place">
 
             <!-- Info Stuff, Title and Description  -->
-            <h1>{{ this.currentPlaceData.name }}</h1>
-            <span>{{ this.currentPlaceData.description }}</span>
+            <div class="infoBox">
+                <h1 class="placeName">{{ this.currentPlaceData.name }}</h1>
+                <div class="placeDescription">{{ this.currentPlaceData.description }}</div>
+            </div>
 
             <!-- Carousel  -->
             <div class="carouselContainer" v-if="showCarousel">
@@ -194,6 +196,39 @@
 
 <style scoped>
 
+/* INFO BOX */
+/*----------*/
+
+.infoBox {
+    padding-top: 1em;
+    padding-bottom: 1em;
+
+    /*to match margins of the photo grid*/
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    margin-bottom: 0.25em;
+
+    background: #ECF0F1;
+
+    border: 1px solid green;
+}
+
+.placeName {
+    font-family: 'Just Another Hand', cursive;
+    font-size: 4em;
+    color: #1E824C;
+    text-align: center;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.placeDescription {
+    padding-left: 5em;
+    padding-right: 5em;
+    font-family: 'Lato', sans-serif;
+    padding-bottom: 0.5em;
+}
+
 /* CAROUSEL */
 /*----------*/
     .carouselContainer {
@@ -205,6 +240,7 @@
         bottom: 0;
         background-color: rgba(0, 0, 0, 0.75);
         z-index:9998;
+        text-align: center;
     }
 
     .carouselPhotoRow {
@@ -275,6 +311,8 @@
         /* Margins same as gutter size for the outer edges of the grid*/
         margin-left: 0.25em;
         margin-right: 0.25em;
+
+        border: 1px solid #ff05e5;
     }
 
     .gallery, .col-xs-6, .col-sm-4, .col-md-4, .col-lg-3 {
