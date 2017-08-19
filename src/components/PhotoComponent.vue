@@ -1,41 +1,14 @@
 <template>
     <div class="photoComponent">
+
         <!-- In case no place is selected / in route, display hint -->
-        <div class="hint" v-if="!this.place">
-            <span>Please select a place on the left to view photos. :-)</span>
-        </div>
+        <hint v-if="!this.place"></hint>
 
         <!-- Display normal gallery if place is selected / in route -->
         <div v-if="this.place">
 
-            <!-- Info Stuff, Title and Description  -->
-            <div class="infoBox">
-                <h1 class="placeName">{{ this.currentPlaceData.name }}</h1>
-                <div class="placeDescription">{{ this.currentPlaceData.description }}</div>
-            </div>
-
-            <!-- Carousel  -->
-            <div class="carouselContainer" v-if="showCarousel">
-
-                <div class="fa fa-lg fa-times fa-inverse carouselButton closeButton" v-on:click="closeCarousel()"></div>
-
-                <div class="fa fa-lg fa-chevron-left fa-inverse carouselButton previousButton" v-on:click="carouselNavButtonClick('prev')"></div>
-
-                <div class="fa fa-lg fa-chevron-right fa-inverse carouselButton nextButton" v-on:click="carouselNavButtonClick('next')"></div>
-
-                <div class="carouselPhotoRow row align-items-center">
-                    <div class="col">
-                        <transition
-                            name="custom-classes-transition"
-                            mode="out-in"
-                            v-bind:enter-active-class="currentAnimation.enterActive"
-                            v-bind:leave-active-class="currentAnimation.leaveActive"
-                        >
-                            <img class="carouselPhoto" v-bind:src="require('@/assets/sydney/' + currentImage.fileName)" v-bind:key="require('@/assets/sydney/' + currentImage.fileName)"/>
-                        </transition>
-                    </div>
-                </div>
-            </div>
+            <!-- InfoBox - Title and Description  -->
+            <InfoBox v-bind:place="this.currentPlaceData"></InfoBox>
 
             <!-- Gallery  -->
             <div class="row galleryRow">
@@ -45,16 +18,36 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Carousel  -->
+            <Carousel v-if="showCarousel" v-bind:currentImage="this.currentImage" ></Carousel>
+
         </div>
     </div>
 </template>
 
 <script>
+    import {EventBus} from '@/eventbus.js'
+
     import travelData from '@/assets/travelData.json'
+
+    import Hint from '@/components/Hint'
+    import InfoBox from '@/components/InfoBox'
+    import Carousel from '@/components/Carousel'
 
     export default {
         name: 'photo',
         props: ['place'],
+        components: {Hint, InfoBox, Carousel},
+        created: function () {
+            EventBus.$on('carousel-button-close', () => {
+                this.handleCarouselClose()
+            })
+
+            EventBus.$on('carousel-button-nav', (direction) => {
+                this.handleCarouselNavigation(direction)
+            })
+        },
         data () {
             return {
                 travelData,
@@ -86,7 +79,7 @@
                     }
                 })
             },
-            closeCarousel: function () {
+            handleCarouselClose: function () {
                 this.showCarousel = false
                 this.$router.push({
                     name: 'Initial-With-Place',
@@ -95,21 +88,17 @@
                     }
                 })
             },
-            carouselNavButtonClick: function (direction) {
+            handleCarouselNavigation: function (direction) {
                 const index = this.getIndexOfPhotoObject(this.currentImage)
                 let newIndex
 
                 if (direction === 'next') {
-                    this.currentAnimation = this.animations.nextImage
-
                     if (index < this.currentPlaceData.photos.length - 1) {
                         newIndex = index + 1
                     } else {
                         newIndex = 0
                     }
                 } else if (direction === 'prev') {
-                    this.currentAnimation = this.animations.prevImage
-
                     if (index > 0) {
                         newIndex = index - 1
                     } else {
@@ -122,7 +111,7 @@
                     name: 'Initial-With-Place-And-Photo-Index',
                     params: {
                         place: this.place,
-                        photoIndex: newIndex
+                        photoIndex: index
                     }
                 })
             },
@@ -210,133 +199,6 @@
     margin-top: 2em;
     margin-bottom: 2em;
 }
-
-/* INFO BOX */
-/*----------*/
-
-.infoBox {
-    padding-top: 1em;
-    padding-bottom: 1em;
-
-    /*to match margins of the photo grid*/
-    margin-right: 0.5em;
-    margin-left: 0.5em;
-    margin-bottom: 0.25em;
-
-    background: #EEEEEE;
-    /* background-image: url("../assets/wavegrid/wavegrid_@2X.png");
-    background-repeat:repeat; */
-
-    /* border: 1px solid green; */
-}
-
-.placeName {
-    font-family: 'Just Another Hand', cursive;
-    font-size: 4em;
-    color: #1E824C;
-    text-align: center;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-}
-
-.placeDescription {
-    padding-left: 5em;
-    padding-right: 5em;
-    font-family: 'Lato', sans-serif;
-    padding-bottom: 0.5em;
-}
-
-/* CAROUSEL */
-/*----------*/
-    .carouselContainer {
-        /*Fullscreen black translucent overlay*/
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.8);
-        z-index:9998;
-        text-align: center;
-    }
-
-    .carouselPhotoRow {
-        height: 100vh; /*Needed for photo centering on smaller devices*/
-    }
-
-    .carouselPhoto {
-        padding: 2.4em; /*for buttons & top/bot */
-        max-height: 100vh;
-        max-width: 100%;
-    }
-
-/* CAROUSEL ANIMATIONS */
-/*---------------------*/
-    .fadeInRight {
-        -webkit-animation-name: fadeInRight;
-        animation-name: fadeInRight;
-        -webkit-animation-duration: .5s;
-        animation-duration: .5s;
-    }
-    .fadeOutLeft {
-        -webkit-animation-name: fadeOutLeft;
-        animation-name: fadeOutLeft;
-        -webkit-animation-duration: .5s;
-        animation-duration: .5s;
-    }
-
-    .fadeOutRight {
-        -webkit-animation-name: fadeOutRight;
-        animation-name: fadeOutRight;
-        -webkit-animation-duration: .5s;
-        animation-duration: .5s;
-    }
-    .fadeInLeft {
-        -webkit-animation-name: fadeInLeft;
-        animation-name: fadeInLeft;
-        -webkit-animation-duration: .5s;
-        animation-duration: .5s;
-    }
-
-/* CAROUSEL BUTTONS */
-/*------------------*/
-    .carouselButton {
-        /* border: 1px solid red; */
-        padding: 15px;
-        background: rgba(255, 255, 255, 0.3);
-    }
-
-    .closeButton {
-        position: absolute;
-        top: 0;
-        right:0;
-        margin: 10px;
-        z-index:9999;
-    }
-    .previousButton {
-        position: absolute;
-        top: 50%;
-        left:0;
-        margin-left: 10px;
-        z-index:9999;
-
-        padding-top: 20px;
-        padding-bottom: 20px;
-        padding-left: 10px;
-        padding-right: 12px;
-    }
-    .nextButton {
-        position: absolute;
-        top: 50%;
-        right:0;
-        margin-right: 10px;
-        z-index:9999;
-
-        padding-top: 20px;
-        padding-bottom: 20px;
-        padding-left: 12px;
-        padding-right: 10px;
-    }
 
 /* PHOTO GALLERY */
 /*---------------*/
@@ -429,13 +291,5 @@
         -moz-transform: scale(1.1);
         -webkit-transform: scale(1.1);
         transform: scale(1.1);
-    }
-
-/* PHOTO */
-/*-------*/
-    .hint {
-        padding-top: 50%;
-        opacity: 0.75;
-        font-size: 24pt;
     }
 </style>
