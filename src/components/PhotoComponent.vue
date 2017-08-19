@@ -11,13 +11,7 @@
             <InfoBox v-bind:place="this.currentPlaceData"></InfoBox>
 
             <!-- Gallery  -->
-            <div class="row galleryRow">
-                <div class="gallery col-xs-6 col-sm-3 col-md-3 col-lg-3" v-for="photo in currentPlaceData.photos" :key="photo.fileName">
-                    <div class="photoContainer">
-                        <div v-on:click="photoClick(photo)" class="photo" :style="{ 'background-image': 'url(' + require('@/assets/sydney/' + photo.fileName) + ')' }"></div>
-                    </div>
-                </div>
-            </div>
+            <Gallery v-bind:placeData="currentPlaceData" ></Gallery>
 
             <!-- Carousel  -->
             <Carousel v-if="showCarousel" v-bind:currentImage="this.currentImage" ></Carousel>
@@ -33,13 +27,18 @@
 
     import Hint from '@/components/Hint'
     import InfoBox from '@/components/InfoBox'
+    import Gallery from '@/components/Gallery'
     import Carousel from '@/components/Carousel'
 
     export default {
-        name: 'photo',
+        name: 'PhotoComponent',
         props: ['place'],
-        components: {Hint, InfoBox, Carousel},
+        components: {Hint, InfoBox, Gallery, Carousel},
         created: function () {
+            EventBus.$on('gallery-photo-clicked', (direction) => {
+                this.handleGalleryPhotoClick(direction)
+            })
+
             EventBus.$on('carousel-button-close', () => {
                 this.handleCarouselClose()
             })
@@ -53,22 +52,11 @@
                 travelData,
                 currentPlaceData: {},
                 currentImage: {},
-                showCarousel: false,
-                animations: {
-                    nextImage: {
-                        enterActive: 'animated fadeInRight', // animation for the new image
-                        leaveActive: 'animated fadeOutLeft'  // animation for the old image
-                    },
-                    prevImage: {
-                        enterActive: 'animated fadeInLeft',  // animation for the new image
-                        leaveActive: 'animated fadeOutRight' // animation for the old image
-                    }
-                },
-                currentAnimation: {}
+                showCarousel: false
             }
         },
         methods: {
-            photoClick: function (photo) {
+            handleGalleryPhotoClick: function (photo) {
                 this.currentImage = photo
                 this.showCarousel = true
                 this.$router.push({
@@ -138,9 +126,6 @@
                 }
 
                 return -1
-            },
-            getPhotoObjectByIndex: function (index) {
-                return this.currentPlaceData.photos[index]
             }
         },
         mounted: function () {
@@ -161,7 +146,7 @@
                 if (!placeFound) {
                     this.$router.push({name: 'Initial'})
                 } else {
-                    const photoObject = this.getPhotoObjectByIndex(this.$route.params.photoIndex)
+                    const photoObject = this.currentPlaceData.photos[this.$route.params.photoIndex]
                     // error handling if no photo with id was was not found
                     if (photoObject) {
                         this.currentImage = photoObject
@@ -187,109 +172,15 @@
 
 <style scoped>
 
-.photoComponent {
-    height: calc(100vh - 54px - 4em);
-    overflow-y: scroll;
+    .photoComponent {
+        height: calc(100vh - 54px - 4em);
+        overflow-y: scroll;
 
-    /* background: rgba(0, 0, 0, 0.75); */
+        margin-right: 2em;
+        margin-left: 0.5em;
 
-    margin-right: 2em;
-    margin-left: 0.5em;
-
-    margin-top: 2em;
-    margin-bottom: 2em;
-}
-
-/* PHOTO GALLERY */
-/*---------------*/
-    .galleryRow {
-        /* Margins same as gutter size for the outer edges of the grid*/
-        margin-right: 0.25em;
-        margin-left: 0.25em;
-
-        /* border: 1px solid #ff05e5; */
+        margin-top: 2em;
+        margin-bottom: 2em;
     }
 
-    .gallery, .col-xs-6, .col-sm-4, .col-md-4, .col-lg-3 {
-        /*To reduce gutter size*/
-        position: relative;
-        min-height: 1px;
-        padding-left: 0.25em;
-        padding-right: 0.25em;
-    }
-
-/* PHOTO CONTAINER */
-/*-----------------*/
-    .photoContainer {
-        /* Needed for Thumbnail Ratios */
-        /* http://www.mademyday.de/css-height-equals-width-with-pure-css.html*/
-        width: 100%;
-        position: relative;
-
-        /* Margins same as gutter size for top / bottom of the thumbnails*/
-        margin-top: 0.25em;
-        margin-bottom: 0.25em;
-
-        overflow: hidden; /*Hides overflow when hover-zooming*/
-
-        cursor: pointer;
-    }
-
-    .photoContainer:before{
-        /* Needed for Thumbnail Ratios */
-        /* http://www.mademyday.de/css-height-equals-width-with-pure-css.html*/
-
-        content: "";
-        display: block;
-
-        /*Ratio 1:1*/
-        padding-top: 100%;
-
-        /*Ratio 2:1*/
-        /* padding-top: 50%; */
-
-        /*Ratio 1:2*/
-        /* padding-top: 200%; */
-
-        /*Ratio 4:3*/
-         /* padding-top: 75%; */
-
-        /*Ratio 16:9*/
-         /* padding-top: 56.25%; */
-    }
-
-/* PHOTO */
-/*-------*/
-    .photo {
-        /* Needed forThumbnail Ratios */
-        /* http://www.mademyday.de/css-height-equals-width-with-pure-css.html*/
-        position:  absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-
-        /*Div with background image instead of <img> so we can easily center the thumbnail*/
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-
-        /*Transition back after hover-zoom*/
-        -moz-transition: all 0.2s;
-        -webkit-transition: all 0.2s;
-        transition: all 0.2s;
-        -moz-transform: scale(1);
-        -webkit-transform: scale(1);
-        transform: scale(1);
-    }
-
-    .photo:hover {
-        /*Hover-zoom Transition*/
-        -moz-transition: all 0.2s;
-        -webkit-transition: all 0.2s;
-        transition: all 0.2s;
-        -moz-transform: scale(1.1);
-        -webkit-transform: scale(1.1);
-        transform: scale(1.1);
-    }
 </style>
