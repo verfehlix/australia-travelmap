@@ -11,6 +11,8 @@ import router from './router'
 
 Vue.config.productionTip = true
 
+window.EventBus = new Vue()
+
 /* eslint-disable no-new */
 new Vue({
     el: '#app',

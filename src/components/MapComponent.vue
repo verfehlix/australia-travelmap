@@ -28,6 +28,7 @@
 <script>
     import Vue from 'vue'
     import * as VueGoogleMaps from 'vue2-google-maps'
+    import {EventBus} from '@/eventbus.js'
 
     Vue.use(VueGoogleMaps, {
         load: {
@@ -131,7 +132,8 @@
                 })
 
                 if (Math.max(document.documentElement.clientWidth, window.innerWidth || 0) < 992) {
-                    this.$parent.mapButtonClicked()
+                    // asdf
+                    EventBus.$emit('place-button-was-clicked')
                 }
             },
             drawRouteFromAtoB: function (placeA, placeB) {
