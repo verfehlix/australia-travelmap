@@ -1,5 +1,5 @@
 <template>
-    <div class='mapPanel'>
+    <div ref="mapPanel" class='mapPanel'>
         <div class='buttons'>
             <div class='row justify-content-center'>
                 <div class='col align-middle'>
@@ -44,6 +44,15 @@
 
     export default {
         name: 'MapPanel',
+        created: function () {
+            EventBus.$on('map-button-show-gallery', () => {
+                this.$refs.mapPanel.classList.remove('soloMargin')
+            })
+
+            EventBus.$on('map-button-show-map', () => {
+                this.$refs.mapPanel.classList.add('soloMargin')
+            })
+        },
         data () {
             return {
                 travelData,
@@ -193,7 +202,12 @@
         margin-top: 2em;
         margin-bottom: 2em;
     }
+
+    .soloMargin {
+        margin-right: 2em;
+    }
+
     .gmap {
-        height: calc(100vh - 56px - 4em);
+        height: calc(100vh - 56px - 4em + 2px);
     }
 </style>

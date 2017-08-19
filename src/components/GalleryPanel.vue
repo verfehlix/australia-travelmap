@@ -1,5 +1,5 @@
 <template>
-    <div class="galleryPanel">
+    <div ref="galleryPanel" class="galleryPanel">
 
         <!-- In case no place is selected / in route, display hint -->
         <hint v-if="!this.place"></hint>
@@ -35,6 +35,14 @@
         props: ['place'],
         components: {Hint, InfoBox, Gallery, Carousel},
         created: function () {
+            EventBus.$on('map-button-show-gallery', () => {
+                this.$refs.galleryPanel.classList.add('soloMargin')
+            })
+
+            EventBus.$on('map-button-show-map', () => {
+                this.$refs.galleryPanel.classList.remove('soloMargin')
+            })
+
             EventBus.$on('gallery-photo-clicked', (direction) => {
                 this.handleGalleryPhotoClick(direction)
             })
@@ -181,6 +189,10 @@
 
         margin-top: 2em;
         margin-bottom: 2em;
+    }
+
+    .soloMargin {
+        margin-left: 1.5em;
     }
 
 </style>

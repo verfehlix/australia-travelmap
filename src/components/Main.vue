@@ -4,7 +4,7 @@
         <HeaderBox></HeaderBox>
 
         <!-- Container that holds both columns -->
-        <div class="row no-gutters splitContainer">
+        <div class="row no-gutters panelContainer">
 
             <!-- Left Column (33% width), holds Map -->
             <div ref="mapPanel" class="col-4 hidden-md-down">
@@ -73,7 +73,7 @@
 
 <style scoped>
 
-    .splitContainer {
+    .panelContainer {
         /* Prevent Navbar from lying over content */
         margin-top: 54px;
         max-height: calc(100vh - 54px);
