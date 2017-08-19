@@ -14,7 +14,7 @@
             <Gallery v-bind:placeData="currentPlaceData" ></Gallery>
 
             <!-- Carousel  -->
-            <Carousel v-if="showCarousel" v-bind:currentImage="this.currentImage" ></Carousel>
+            <Carousel v-if="showCarousel" v-bind:currentImage="this.currentImage" v-bind:placeData="currentPlaceData"></Carousel>
 
         </div>
     </div>
@@ -189,6 +189,8 @@
 
         margin-top: 2em;
         margin-bottom: 2em;
+
+
     }
 
     .soloMargin {

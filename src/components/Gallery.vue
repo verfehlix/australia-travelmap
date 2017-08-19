@@ -2,7 +2,7 @@
     <div class="gallery">
         <div class="row galleryRow">
             <div class="galleryColumn col-xs-6 col-sm-3 col-md-3 col-lg-3" v-for="photo in placeData.photos" :key="photo.fileName">
-                <Photo v-bind:photo="photo" ></Photo>
+                <Photo v-bind:place="placeData" v-bind:photo="photo" ></Photo>
             </div>
         </div>
     </div>

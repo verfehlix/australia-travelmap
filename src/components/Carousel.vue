@@ -15,7 +15,7 @@
                     v-bind:enter-active-class="currentAnimation.enterActive"
                     v-bind:leave-active-class="currentAnimation.leaveActive"
                 >
-                    <img class="carouselPhoto" v-bind:src="require('@/assets/sydney/' + currentImage.fileName)" v-bind:key="currentImage.fileName" />
+                    <img class="carouselPhoto" v-bind:src="require('@/assets/' + placeData.id + '/' + currentImage.fileName)" v-bind:key="currentImage.fileName" />
                 </transition>
             </div>
         </div>
@@ -27,7 +27,7 @@
 
     export default {
         name: 'Carousel',
-        props: ['currentImage'],
+        props: ['currentImage', 'placeData'],
         data () {
             return {
                 animations: {

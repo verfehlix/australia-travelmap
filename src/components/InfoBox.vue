@@ -28,8 +28,6 @@
         background: #EEEEEE;
         /* background-image: url("../assets/wavegrid/wavegrid_@2X.png");
         background-repeat:repeat; */
-
-        /* border: 1px solid green; */
     }
 
     .placeName {

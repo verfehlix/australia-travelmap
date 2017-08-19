@@ -1,6 +1,6 @@
 <template>
     <div class="photoContainer">
-        <div v-on:click="photoClick(photo)" class="photo" :style="{ 'background-image': 'url(' + require('@/assets/sydney/' + photo.fileName) + ')' }"></div>
+        <div v-on:click="photoClick(photo)" class="photo" :style="{ 'background-image': 'url(' + require('@/assets/' + place.id + '/' + photo.fileName) + ')' }"></div>
     </div>
 </template>
 
@@ -9,7 +9,7 @@
 
     export default {
         name: 'Photo',
-        props: ['photo'],
+        props: ['photo', 'place'],
         methods: {
             photoClick: function (photo) {
                 EventBus.$emit('gallery-photo-clicked', photo)
