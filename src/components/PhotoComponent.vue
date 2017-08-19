@@ -198,6 +198,19 @@
 
 <style scoped>
 
+.photoComponent {
+    height: calc(100vh - 54px - 4em);
+    overflow-y: scroll;
+
+    /* background: rgba(0, 0, 0, 0.75); */
+
+    margin-right: 2em;
+    margin-left: 0.5em;
+
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
 /* INFO BOX */
 /*----------*/
 

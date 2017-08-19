@@ -8,14 +8,16 @@
         </div>
 
         <div class="splitContainer row no-gutters">
-            <div class="col-4 hidden-md-down splitPanel-left">
+            <div ref="mapPanelLeft" class="col-4 hidden-md-down">
                 <MapComponent v-bind:place="$route.params.place"></MapComponent>
             </div>
 
-            <div class="col splitPanel-right">
+            <div ref="photoPanelRight" class="col">
                 <PhotoComponent v-bind:place="$route.params.place"></PhotoComponent>
             </div>
         </div>
+
+        <div ref="mapButton" class="fa fa-3x fa-map fa-inverse hidden-lg-up mapButton" v-on:click="mapButtonClicked()"></div>
 
     </div>
 </template>
@@ -27,13 +29,44 @@
     export default {
         name: 'main',
         components: {MapComponent, PhotoComponent},
+        showMapOnSmallScreens: false,
         data () {
             return {}
+        },
+        methods: {
+            mapButtonClicked: function () {
+                if (!this.showMapOnSmallScreens) {
+                    this.$refs.mapPanelLeft.classList.remove('hidden-md-down')
+                    this.$refs.mapPanelLeft.classList.remove('col-4')
+                    this.$refs.mapPanelLeft.classList.add('col')
+
+                    this.$refs.photoPanelRight.classList.add('hidden-md-down')
+
+                    this.$gmapDefaultResizeBus.$emit('resize')
+
+                    this.$refs.mapButton.classList.add('fa-picture-o')
+                    this.$refs.mapButton.classList.remove('fa-map')
+
+                    this.showMapOnSmallScreens = true
+                } else {
+                    this.$refs.mapPanelLeft.classList.add('hidden-md-down')
+                    this.$refs.mapPanelLeft.classList.add('col-4')
+                    this.$refs.mapPanelLeft.classList.remove('col')
+
+                    this.$refs.photoPanelRight.classList.remove('hidden-md-down')
+
+                    this.$gmapDefaultResizeBus.$emit('resize')
+
+                    this.$refs.mapButton.classList.remove('fa-picture-o')
+                    this.$refs.mapButton.classList.add('fa-map')
+
+                    this.showMapOnSmallScreens = false
+                }
+            }
         }
     }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
     .titleText {
         font-family: 'Just Another Hand', cursive;
@@ -51,27 +84,15 @@
         /* Prevent Navbar from lying over content */
         margin-top: 54px;
         max-height: calc(100vh - 54px);
+        overflow: hidden;
     }
-    .splitPanel-left {
-        margin-left: 2em;
-        margin-right: 0.5em;
 
-        margin-top: 2em;
-        margin-bottom: 2em;
-
-        /* border: 1px solid red; */
-    }
-    .splitPanel-right {
-        height: calc(100vh - 54px - 4em);
-        overflow-y: scroll;
-
-        margin-right: 2em;
-        margin-left: 0.5em;
-
-        margin-top: 2em;
-        margin-bottom: 2em;
-
-
-        /* border: 1px solid blue; */
+    .mapButton {
+        padding: 15px;
+        position: absolute;
+        background: rgba(0, 0, 0, 0.75);
+        bottom: 0;
+        right:0;
+        margin: 75px;
     }
 </style>

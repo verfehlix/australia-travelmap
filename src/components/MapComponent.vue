@@ -129,6 +129,10 @@
                         place: place.id
                     }
                 })
+
+                if (Math.max(document.documentElement.clientWidth, window.innerWidth || 0) < 992) {
+                    this.$parent.mapButtonClicked()
+                }
             },
             drawRouteFromAtoB: function (placeA, placeB) {
                 const rendererOptions = {
@@ -180,6 +184,13 @@
 </script>
 
 <style scoped>
+    .mapComponent {
+        margin-left: 2em;
+        margin-right: 0.5em;
+
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
     .gmap {
         height: calc(100vh - 56px - 4em);
     }
