@@ -1,5 +1,5 @@
 <template>
-    <div class="photoComponent">
+    <div class="galleryPanel">
 
         <!-- In case no place is selected / in route, display hint -->
         <hint v-if="!this.place"></hint>
@@ -31,7 +31,7 @@
     import Carousel from '@/components/Carousel'
 
     export default {
-        name: 'PhotoComponent',
+        name: 'GalleryPanel',
         props: ['place'],
         components: {Hint, InfoBox, Gallery, Carousel},
         created: function () {
@@ -172,7 +172,7 @@
 
 <style scoped>
 
-    .photoComponent {
+    .galleryPanel {
         height: calc(100vh - 54px - 4em);
         overflow-y: scroll;
 

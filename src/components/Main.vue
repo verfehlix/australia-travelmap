@@ -7,13 +7,13 @@
         <div class="row no-gutters splitContainer">
 
             <!-- Left Column (33% width), holds Map -->
-            <div ref="mapPanelLeft" class="col-4 hidden-md-down">
-                <MapComponent v-bind:place="$route.params.place"></MapComponent>
+            <div ref="mapPanel" class="col-4 hidden-md-down">
+                <MapPanel v-bind:place="$route.params.place"></MapPanel>
             </div>
 
             <!-- Right Column (67% width), holds Gallery -->
-            <div ref="galleryPanelRight" class="col">
-                <PhotoComponent v-bind:place="$route.params.place"></PhotoComponent>
+            <div ref="galleryPanel" class="col">
+                <GalleryPanel v-bind:place="$route.params.place"></GalleryPanel>
             </div>
         </div>
 
@@ -26,14 +26,14 @@
     import {EventBus} from '@/eventbus.js'
 
     import HeaderBox from '@/components/HeaderBox'
-    import MapComponent from '@/components/MapComponent'
-    import PhotoComponent from '@/components/PhotoComponent'
+    import MapPanel from '@/components/MapPanel'
+    import GalleryPanel from '@/components/GalleryPanel'
     import FloatingMapButton from '@/components/FloatingMapButton'
 
     export default {
 
         name: 'main',
-        components: {HeaderBox, MapComponent, PhotoComponent, FloatingMapButton},
+        components: {HeaderBox, MapPanel, GalleryPanel, FloatingMapButton},
         data () {
             return {
 
@@ -49,20 +49,20 @@
         },
         methods: {
             displayMapOnSmallDevices: function () {
-                this.$refs.mapPanelLeft.classList.remove('hidden-md-down')
-                this.$refs.mapPanelLeft.classList.remove('col-4')
-                this.$refs.mapPanelLeft.classList.add('col')
+                this.$refs.mapPanel.classList.remove('hidden-md-down')
+                this.$refs.mapPanel.classList.remove('col-4')
+                this.$refs.mapPanel.classList.add('col')
 
-                this.$refs.galleryPanelRight.classList.add('hidden-md-down')
+                this.$refs.galleryPanel.classList.add('hidden-md-down')
 
                 this.$gmapDefaultResizeBus.$emit('resize')
             },
             displayGalleryOnSmallDevices: function () {
-                this.$refs.mapPanelLeft.classList.add('hidden-md-down')
-                this.$refs.mapPanelLeft.classList.add('col-4')
-                this.$refs.mapPanelLeft.classList.remove('col')
+                this.$refs.mapPanel.classList.add('hidden-md-down')
+                this.$refs.mapPanel.classList.add('col-4')
+                this.$refs.mapPanel.classList.remove('col')
 
-                this.$refs.galleryPanelRight.classList.remove('hidden-md-down')
+                this.$refs.galleryPanel.classList.remove('hidden-md-down')
 
                 this.$gmapDefaultResizeBus.$emit('resize')
             }

@@ -1,5 +1,5 @@
 <template>
-    <div class='mapComponent'>
+    <div class='mapPanel'>
         <div class='buttons'>
             <div class='row justify-content-center'>
                 <div class='col align-middle'>
@@ -43,7 +43,7 @@
     import travelData from '@/assets/travelData.json'
 
     export default {
-        name: 'map',
+        name: 'MapPanel',
         data () {
             return {
                 travelData,
@@ -186,7 +186,7 @@
 </script>
 
 <style scoped>
-    .mapComponent {
+    .mapPanel {
         margin-left: 2em;
         margin-right: 0.5em;
 

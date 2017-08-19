@@ -15,7 +15,7 @@
 <style scoped>
     .hint {
         height: 100%;
-        padding-top: 40%;
+        padding-top: 25%;
         /* opacity: 0.75; */
         font-family: 'Just Another Hand', cursive;
         font-size: 4em;
