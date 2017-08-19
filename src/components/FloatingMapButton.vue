@@ -20,26 +20,14 @@
         methods: {
             mapButtonClicked: function () {
                 if (!this.showMapOnSmallScreens) {
-                    this.$parent.$refs.mapPanelLeft.classList.remove('hidden-md-down')
-                    this.$parent.$refs.mapPanelLeft.classList.remove('col-4')
-                    this.$parent.$refs.mapPanelLeft.classList.add('col')
-
-                    this.$parent.$refs.photoPanelRight.classList.add('hidden-md-down')
-
-                    this.$parent.$gmapDefaultResizeBus.$emit('resize')
+                    EventBus.$emit('map-button-show-map')
 
                     this.$refs.mapButton.classList.add('fa-picture-o')
                     this.$refs.mapButton.classList.remove('fa-map')
 
                     this.showMapOnSmallScreens = true
                 } else {
-                    this.$parent.$refs.mapPanelLeft.classList.add('hidden-md-down')
-                    this.$parent.$refs.mapPanelLeft.classList.add('col-4')
-                    this.$parent.$refs.mapPanelLeft.classList.remove('col')
-
-                    this.$parent.$refs.photoPanelRight.classList.remove('hidden-md-down')
-
-                    this.$parent.$gmapDefaultResizeBus.$emit('resize')
+                    EventBus.$emit('map-button-show-gallery')
 
                     this.$refs.mapButton.classList.remove('fa-picture-o')
                     this.$refs.mapButton.classList.add('fa-map')
