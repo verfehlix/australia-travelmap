@@ -19,6 +19,7 @@
                 </transition>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -30,6 +31,7 @@
         props: ['currentImage', 'placeData'],
         data () {
             return {
+                showPictureInfo: true,
                 animations: {
                     nextImage: {
                         enterActive: 'animated fadeInRight', // animation for the new image
@@ -118,6 +120,20 @@
         /* border: 1px solid red; */
         padding: 15px;
         background: rgba(255, 255, 255, 0.3);
+
+        transition: all 0.2s ease-out;
+        -webkit-transition: all 0.2s ease-out;
+        -moz-transition: all 0.2s ease-out;
+        -o-transition: all 0.2s ease-out;
+    }
+
+    .carouselButton:hover {
+        background: rgba(255, 255, 255, 0.5);
+
+        transition: all 0.2s ease-out;
+        -webkit-transition: all 0.2s ease-out;
+        -moz-transition: all 0.2s ease-out;
+        -o-transition: all 0.2s ease-out;
     }
 
     .closeButton {

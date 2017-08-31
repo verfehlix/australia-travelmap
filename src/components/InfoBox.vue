@@ -18,7 +18,7 @@
 <style scoped>
     .infoBox {
         padding-top: 1em;
-        padding-bottom: 1em;
+        padding-bottom: 2em;
 
         /*to match margins of the photo grid*/
         margin-right: 0.5em;

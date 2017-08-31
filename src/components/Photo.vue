@@ -1,6 +1,6 @@
 <template>
     <div class="photoContainer">
-        <div v-on:click="photoClick(photo)" class="photo" :style="{ 'background-image': 'url(' + require('@/assets/' + place.id + '/' + photo.fileName) + ')' }"></div>
+        <div v-on:click="photoClick(photo)" class="photo" :style="{ 'background-image': 'url(' + require('@/assets/' + place.id + '/thumbs/' + photo.fileName) + ')' }"></div>
     </div>
 </template>
 

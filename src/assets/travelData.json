@@ -32,6 +32,10 @@
                 {
                     "fileName": "DSC09906.jpg",
                     "description" : "Harbour Bridge"
+                },
+                {
+                    "fileName": "DSC_2038.JPG",
+                    "description": "DSC_2038.JPG"
                 }
             ]
         },
@@ -138,6 +142,129 @@
                 {
                     "fileName": "DSC_2132.JPG",
                     "description": "DSC_2132.JPG"
+                }
+            ]
+        },
+        {
+            "id": "nelsonbay",
+            "name": "Nelson Bay",
+            "description": "TEUER! ARGH!",
+            "coordinates": {
+                "lat":-32.72043,
+                "lng":152.14398
+            },
+            "photos": [
+                {
+                    "fileName": "DSC00703.jpg",
+                    "description": "DSC00703.jpg"
+                },
+                {
+                    "fileName": "DSC00717.jpg",
+                    "description": "DSC00717.jpg"
+                },
+                {
+                    "fileName": "DSC00720.jpg",
+                    "description": "DSC00720.jpg"
+                },
+                {
+                    "fileName": "DSC_1959.JPG",
+                    "description": "DSC_1959.JPG"
+                },
+                {
+                    "fileName": "DSC_1966.JPG",
+                    "description": "DSC_1966.JPG"
+                },
+                {
+                    "fileName": "DSC_1971.JPG",
+                    "description": "DSC_1971.JPG"
+                },
+                {
+                    "fileName": "DSC_1993.JPG",
+                    "description": "DSC_1993.JPG"
+                },
+                {
+                    "fileName": "DSC_2018.JPG",
+                    "description": "DSC_2018.JPG"
+                },
+                {
+                    "fileName": "DSC_2025.JPG",
+                    "description": "DSC_2025.JPG"
+                },
+                {
+                    "fileName": "DSC_2026.JPG",
+                    "description": "DSC_2026.JPG"
+                },
+                {
+                    "fileName": "DSC_2038.JPG",
+                    "description": "DSC_2038.JPG"
+                },
+                {
+                    "fileName": "DSC_2132.JPG",
+                    "description": "DSC_2132.JPG"
+                },
+                {
+                    "fileName": "DSC02992.jpg",
+                    "description": "DSC02992.jpg"
+                },
+                {
+                    "fileName": "DSC03005.jpg",
+                    "description": "DSC03005.jpg"
+                },
+                {
+                    "fileName": "DSC03034.jpg",
+                    "description": "DSC03034.jpg"
+                },
+                {
+                    "fileName": "DSC03096.jpg",
+                    "description": "DSC03096.jpg"
+                },
+                {
+                    "fileName": "DSC03101.jpg",
+                    "description": "DSC03101.jpg"
+                },
+                {
+                    "fileName": "DSC_2603.JPG",
+                    "description": "DSC_2603.JPG"
+                },
+                {
+                    "fileName": "DSC_2616.JPG",
+                    "description": "DSC_2616.JPG"
+                },
+                {
+                    "fileName": "DSC_2628.JPG",
+                    "description": "DSC_2628.JPG"
+                },
+                {
+                    "fileName": "DSC_2632.JPG",
+                    "description": "DSC_2632.JPG"
+                },
+                {
+                    "fileName": "DSC03096.jpg",
+                    "description" : "Waterfall along the Kuranda Scenic Railway Trail"
+                },
+                {
+                    "fileName": "DSC00067.jpg",
+                    "description" : "Sydney Opera House at dusk"
+                },
+                {
+                    "fileName": "DSC00120.jpg",
+                    "description" : "Bondi Bay"
+                },
+                {
+                    "fileName": "DSC00012.jpg",
+                    "description" : "St Marys Cathedral"
+                },
+                {
+                    "fileName": "DSC09946.jpg",
+                    "description" : "Sydney Opera House Roof"
+                },
+                {
+                    "fileName": "DSC09906.jpg",
+                    "description" : "Harbour Bridge"
+                },
+                {
+                    "fileName": "DSC_2038.JPG",
+                    "description": "DSC_2038.JPG"
                 }
             ]
         }
