@@ -2,6 +2,16 @@
 
 > Travelmap Australia 2017
 
+Tool that visualizes my travels through Australia. Map View / Photo Gallery View Side-by-Side.  
+Uses a easily customizable json file that holds all travel data --> can be used for other travelling trips etc. !  
+For creating your own travelData.json file best use the provided [data-generator](https://github.com/verfehlix/australia-travelmap-datagenerator) ! :-)
+
+**Warning:** Tool is not yet complete / done.
+
+## Showcase
+
+![travelmap-small](https://user-images.githubusercontent.com/7032914/30646808-7821ca7c-9e1a-11e7-88fb-ae9f96e838b3.gif)
+
 ## Build Setup
 
 ``` bash
