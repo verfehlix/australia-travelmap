@@ -11,31 +11,43 @@
             "photos": [
                 {
                     "fileName": "DSC03096.jpg",
-                    "description" : "Waterfall along the Kuranda Scenic Railway Trail"
+                    "description" : "Waterfall along the Kuranda Scenic Railway Trail",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC00067.jpg",
-                    "description" : "Sydney Opera House at dusk"
+                    "description" : "Sydney Opera House at dusk",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC00120.jpg",
-                    "description" : "Bondi Bay"
+                    "description" : "Bondi Bay",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC00012.jpg",
-                    "description" : "St Marys Cathedral"
+                    "description" : "St Marys Cathedral",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC09946.jpg",
-                    "description" : "Sydney Opera House Roof"
+                    "description" : "Sydney Opera House Roof",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC09906.jpg",
-                    "description" : "Harbour Bridge"
+                    "description" : "Harbour Bridge",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2038.JPG",
-                    "description": "DSC_2038.JPG"
+                    "description": "DSC_2038.JPG",
+                    "type": "image"
+                },
+                {
+                    "fileName": "MAH00342.MP4",
+                    "description": "MAH00342.MP4",
+                    "type": "video"
                 }
             ]
         },
@@ -50,39 +62,48 @@
             "photos": [
                 {
                     "fileName": "DSC02992.jpg",
-                    "description": "DSC02992.jpg"
+                    "description": "DSC02992.jpg",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC03005.jpg",
-                    "description": "DSC03005.jpg"
+                    "description": "DSC03005.jpg",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC03034.jpg",
-                    "description": "DSC03034.jpg"
+                    "description": "DSC03034.jpg",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC03096.jpg",
-                    "description": "DSC03096.jpg"
+                    "description": "DSC03096.jpg",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC03101.jpg",
-                    "description": "DSC03101.jpg"
+                    "description": "DSC03101.jpg",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2603.JPG",
-                    "description": "DSC_2603.JPG"
+                    "description": "DSC_2603.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2616.JPG",
-                    "description": "DSC_2616.JPG"
+                    "description": "DSC_2616.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2628.JPG",
-                    "description": "DSC_2628.JPG"
+                    "description": "DSC_2628.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2632.JPG",
-                    "description": "DSC_2632.JPG"
+                    "description": "DSC_2632.JPG",
+                    "type": "image"
                 }
             ]
         },
@@ -97,51 +118,63 @@
             "photos": [
                 {
                     "fileName": "DSC00703.jpg",
-                    "description": "DSC00703.jpg"
+                    "description": "DSC00703.jpg",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC00717.jpg",
-                    "description": "DSC00717.jpg"
+                    "description": "DSC00717.jpg",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC00720.jpg",
-                    "description": "DSC00720.jpg"
+                    "description": "DSC00720.jpg",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_1959.JPG",
-                    "description": "DSC_1959.JPG"
+                    "description": "DSC_1959.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_1966.JPG",
-                    "description": "DSC_1966.JPG"
+                    "description": "DSC_1966.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_1971.JPG",
-                    "description": "DSC_1971.JPG"
+                    "description": "DSC_1971.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_1993.JPG",
-                    "description": "DSC_1993.JPG"
+                    "description": "DSC_1993.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2018.JPG",
-                    "description": "DSC_2018.JPG"
+                    "description": "DSC_2018.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2025.JPG",
-                    "description": "DSC_2025.JPG"
+                    "description": "DSC_2025.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2026.JPG",
-                    "description": "DSC_2026.JPG"
+                    "description": "DSC_2026.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2038.JPG",
-                    "description": "DSC_2038.JPG"
+                    "description": "DSC_2038.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2132.JPG",
-                    "description": "DSC_2132.JPG"
+                    "description": "DSC_2132.JPG",
+                    "type": "image"
                 }
             ]
         },
@@ -156,115 +189,143 @@
             "photos": [
                 {
                     "fileName": "DSC00703.jpg",
-                    "description": "DSC00703.jpg"
+                    "description": "DSC00703.jpg",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC00717.jpg",
-                    "description": "DSC00717.jpg"
+                    "description": "DSC00717.jpg",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC00720.jpg",
-                    "description": "DSC00720.jpg"
+                    "description": "DSC00720.jpg",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_1959.JPG",
-                    "description": "DSC_1959.JPG"
+                    "description": "DSC_1959.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_1966.JPG",
-                    "description": "DSC_1966.JPG"
+                    "description": "DSC_1966.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_1971.JPG",
-                    "description": "DSC_1971.JPG"
+                    "description": "DSC_1971.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_1993.JPG",
-                    "description": "DSC_1993.JPG"
+                    "description": "DSC_1993.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2018.JPG",
-                    "description": "DSC_2018.JPG"
+                    "description": "DSC_2018.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2025.JPG",
-                    "description": "DSC_2025.JPG"
+                    "description": "DSC_2025.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2026.JPG",
-                    "description": "DSC_2026.JPG"
+                    "description": "DSC_2026.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2038.JPG",
-                    "description": "DSC_2038.JPG"
+                    "description": "DSC_2038.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2132.JPG",
-                    "description": "DSC_2132.JPG"
+                    "description": "DSC_2132.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC02992.jpg",
-                    "description": "DSC02992.jpg"
+                    "description": "DSC02992.jpg",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC03005.jpg",
-                    "description": "DSC03005.jpg"
+                    "description": "DSC03005.jpg",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC03034.jpg",
-                    "description": "DSC03034.jpg"
+                    "description": "DSC03034.jpg",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC03096.jpg",
-                    "description": "DSC03096.jpg"
+                    "description": "DSC03096.jpg",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC03101.jpg",
-                    "description": "DSC03101.jpg"
+                    "description": "DSC03101.jpg",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2603.JPG",
-                    "description": "DSC_2603.JPG"
+                    "description": "DSC_2603.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2616.JPG",
-                    "description": "DSC_2616.JPG"
+                    "description": "DSC_2616.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2628.JPG",
-                    "description": "DSC_2628.JPG"
+                    "description": "DSC_2628.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2632.JPG",
-                    "description": "DSC_2632.JPG"
+                    "description": "DSC_2632.JPG",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC03096.jpg",
-                    "description" : "Waterfall along the Kuranda Scenic Railway Trail"
+                    "description" : "Waterfall along the Kuranda Scenic Railway Trail",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC00067.jpg",
-                    "description" : "Sydney Opera House at dusk"
+                    "description" : "Sydney Opera House at dusk",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC00120.jpg",
-                    "description" : "Bondi Bay"
+                    "description" : "Bondi Bay",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC00012.jpg",
-                    "description" : "St Marys Cathedral"
+                    "description" : "St Marys Cathedral",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC09946.jpg",
-                    "description" : "Sydney Opera House Roof"
+                    "description" : "Sydney Opera House Roof",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC09906.jpg",
-                    "description" : "Harbour Bridge"
+                    "description" : "Harbour Bridge",
+                    "type": "image"
                 },
                 {
                     "fileName": "DSC_2038.JPG",
-                    "description": "DSC_2038.JPG"
+                    "description": "DSC_2038.JPG",
+                    "type": "image"
                 }
             ]
         }

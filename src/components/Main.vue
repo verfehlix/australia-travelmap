@@ -77,7 +77,7 @@
         /* Prevent Navbar from lying over content */
         margin-top: 54px;
         max-height: calc(100vh - 54px);
-        overflow: hidden;
+        /* overflow: hidden; */
     }
 
 </style>

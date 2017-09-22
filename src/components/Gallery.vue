@@ -2,7 +2,10 @@
     <div class="gallery">
         <div class="row galleryRow">
             <div class="galleryColumn col-xs-6 col-sm-3 col-md-3 col-lg-3" v-for="photo in placeData.photos" :key="photo.fileName">
-                <Photo v-bind:place="placeData" v-bind:photo="photo" ></Photo>
+                <!-- If type is Image -->
+                <Photo v-if="photo.type === 'image'" v-bind:place="placeData" v-bind:photo="photo" ></Photo>
+                <!-- If type is Video -->
+                <VideoThumbnail v-if="photo.type === 'video'" v-bind:place="placeData" v-bind:photo="photo"></VideoThumbnail>
             </div>
         </div>
     </div>
@@ -10,11 +13,12 @@
 
 <script>
     import Photo from '@/components/Photo'
+    import VideoThumbnail from '@/components/VideoThumbnail'
 
     export default {
         name: 'Gallery',
         props: ['placeData'],
-        components: {Photo}
+        components: {Photo, VideoThumbnail}
     }
 </script>
 
