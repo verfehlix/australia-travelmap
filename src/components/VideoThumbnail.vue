@@ -1,9 +1,11 @@
 <template>
     <div class="videoContainer">
-        VIDEO
-        <video class="video">
-            <source v-bind:src="require('@/assets/' + place.id + '/' + photo.fileName)" type="video/mp4">
-        </video>
+        <div class="videoContent">
+            <div class="fa fa-play-circle-o fa-inverse playButton"></div>
+            <video class="video">
+                <source v-bind:src="require('@/assets/' + place.id + '/' + photo.fileName)" type="video/mp4">
+            </video>
+        </div>
     </div>
 </template>
 
@@ -24,30 +26,34 @@
 <style scoped>
 
     .videoContainer {
-        /* Needed for Thumbnail Ratios, see http://www.mademyday.de/css-height-equals-width-with-pure-css.html */
-        width: 100%;
-        position: relative;
-
         /* Margins same as gutter size for top / bottom of the thumbnails*/
         margin-top: 0.25em;
         margin-bottom: 0.25em;
 
-        /*Hides overflow when hover-zooming*/
+        cursor: pointer;
         overflow: hidden;
 
-        cursor: pointer;
+        position: relative;
+	    width: 100%;
+    }
+
+    .videoContent {
+        position:  absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
     }
 
     .videoContainer:before{
-        /* Needed for Thumbnail Ratios, see http://www.mademyday.de/css-height-equals-width-with-pure-css.html */
         content: "";
         display: block;
 
         /*Ratio 1:1*/
-        /* padding-top: 100%; */
+        padding-top: 100%;
 
         /*Ratio 2:1*/
-        padding-top: 66%;
+        /* padding-top: 50%; */
 
         /*Ratio 1:2*/
         /* padding-top: 200%; */
@@ -60,38 +66,41 @@
     }
 
     .video {
-        /* Needed forThumbnail Ratios, see http://www.mademyday.de/css-height-equals-width-with-pure-css.html */
-        position:  absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
+        width: 100%;
+    }
 
-        height: inherit;
-        width: inherit;
+    .playButton {
+        /*Absolute Horizontal & Vertical Centering*/
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
 
-        /*Div with background image instead of <img> so we can easily center the thumbnail*/
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
+        z-index: 9999;
+
+        font-size: 10em;
+
+        opacity: 0.75;
 
         /*Transition back after hover-zoom*/
         -moz-transition: all 0.2s;
         -webkit-transition: all 0.2s;
         transition: all 0.2s;
-        -moz-transform: scale(1);
-        -webkit-transform: scale(1);
-        transform: scale(1);
+        -moz-transform: translate(-50%,-50%) scale(1);
+        -webkit-transform: translate(-50%,-50%) scale(1);
+        transform: translate(-50%,-50%) scale(1);
     }
 
-    .photo:hover {
-        /*Hover-zoom Transition*/
+    .playButton:hover {
+        opacity: 0.9;
+
+        /* Hover-zoom Transition */
         -moz-transition: all 0.2s;
         -webkit-transition: all 0.2s;
         transition: all 0.2s;
-        -moz-transform: scale(1.1);
-        -webkit-transform: scale(1.1);
-        transform: scale(1.1);
+        -moz-transform: translate(-50%,-50%) scale(1.1);
+        -webkit-transform: translate(-50%,-50%) scale(1.1);
+        transform: translate(-50%,-50%) scale(1.1);
     }
 
 </style>
