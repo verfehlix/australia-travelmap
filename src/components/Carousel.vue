@@ -15,7 +15,10 @@
                     v-bind:enter-active-class="currentAnimation.enterActive"
                     v-bind:leave-active-class="currentAnimation.leaveActive"
                 >
-                    <img class="carouselPhoto" v-bind:src="require('@/assets/' + placeData.id + '/' + currentImage.fileName)" v-bind:key="currentImage.fileName" />
+                    <!-- If type is Image -->
+                    <img v-if="currentImage.type === 'image'" class="carouselPhoto" v-bind:src="require('@/assets/' + placeData.id + '/' + currentImage.fileName)" v-bind:key="currentImage.fileName" />
+                    <!-- If type is Video -->
+                    <video controls v-if="currentImage.type === 'video'" class="carouselPhoto" v-bind:src="require('@/assets/' + placeData.id + '/' + currentImage.fileName)"></video>
                 </transition>
             </div>
         </div>

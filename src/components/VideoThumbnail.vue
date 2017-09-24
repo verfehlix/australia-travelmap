@@ -1,6 +1,6 @@
 <template>
     <div class="videoContainer">
-        <div class="videoContent">
+        <div class="videoContent" v-on:click="photoClick(photo)">
             <div class="fa fa-play-circle-o fa-inverse playButton"></div>
             <video class="video">
                 <source v-bind:src="require('@/assets/' + place.id + '/' + photo.fileName)" type="video/mp4">
@@ -76,7 +76,7 @@
         left: 50%;
         transform: translate(-50%,-50%);
 
-        z-index: 9999;
+        z-index: 8888;
 
         font-size: 10em;
 

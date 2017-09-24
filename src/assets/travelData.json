@@ -25,11 +25,6 @@
                     "type": "image"
                 },
                 {
-                    "fileName": "MAH00342r.MP4",
-                    "description": "MAH00342.MP4 ROTATED",
-                    "type": "video"
-                },
-                {
                     "fileName": "DSC00012.jpg",
                     "description" : "St Marys Cathedral",
                     "type": "image"
@@ -48,6 +43,11 @@
                     "fileName": "DSC_2038.JPG",
                     "description": "DSC_2038.JPG",
                     "type": "image"
+                },
+                {
+                    "fileName": "MAH00342r.MP4",
+                    "description": "MAH00342.MP4 ROTATED",
+                    "type": "video"
                 }
             ]
         },
