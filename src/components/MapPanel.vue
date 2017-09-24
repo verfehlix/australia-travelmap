@@ -4,7 +4,7 @@
             <div class='row justify-content-center'>
                 <div class='col align-middle'>
                     <gmap-map class='gmap' ref='gmap'
-                    :center='{lat:-33.865143, lng:151.209900}'
+                    :center='{lat: currentPlace.coordinates.lat, lng: currentPlace.coordinates.lng}'
                     :zoom='10'
                     :options='mapOptions'
                     map-type-id='terrain'>
@@ -44,6 +44,7 @@
 
     export default {
         name: 'MapPanel',
+        props: ['place'],
         created: function () {
             EventBus.$on('map-button-show-gallery', () => {
                 this.$refs.mapPanel.classList.remove('soloMargin')
@@ -52,13 +53,49 @@
             EventBus.$on('map-button-show-map', () => {
                 this.$refs.mapPanel.classList.add('soloMargin')
             })
+
+            const routePlaceName = this.place
+
+            for (let i = 0; i < this.travelData.places.length; i++) {
+                const placeData = this.travelData.places[i]
+
+                if (placeData.id === routePlaceName) {
+                    this.currentPlace = placeData
+                }
+            }
+        },
+        mounted: function () {
+            VueGoogleMaps.loaded.then(() => {
+                setTimeout(() => {
+                    this.drawAllRoutes()
+                }, 100)
+            })
+        },
+        watch: {
+            '$route': function () {
+                const routePlaceName = this.place
+
+                for (let i = 0; i < this.travelData.places.length; i++) {
+                    const placeData = this.travelData.places[i]
+
+                    if (placeData.id === routePlaceName) {
+                        this.currentPlace = placeData
+                    }
+                }
+            }
         },
         data () {
             return {
                 travelData,
+                currentPlace: {
+                    coordinates: {
+                        lat: -33.865143,
+                        lng: 151.209900
+                    }
+                },
                 directionRendererArray: [],
                 mapOptions: {
-                    // draggable: false,
+                    // draggable: true,
                     clickableIcons: false,
                     // fullscreenControl: false,
                     keyboardShortcuts: false,
@@ -183,13 +220,6 @@
                     this.drawRouteFromAtoB(currentPlace, nextPlace)
                 }
             }
-        },
-        mounted: function () {
-            VueGoogleMaps.loaded.then(() => {
-                setTimeout(() => {
-                    this.drawAllRoutes()
-                }, 100)
-            })
         }
     }
 </script>
