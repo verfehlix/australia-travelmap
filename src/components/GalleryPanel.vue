@@ -34,6 +34,11 @@
         name: 'GalleryPanel',
         props: ['place'],
         components: {Hint, InfoBox, Gallery, Carousel},
+        watch: {
+            '$route' (to, from) {
+                this.handleRouteChange()
+            }
+        },
         created: function () {
             EventBus.$on('map-button-show-gallery', () => {
                 this.$refs.galleryPanel.classList.add('soloMargin')
@@ -56,38 +61,7 @@
             })
         },
         mounted: function () {
-            // if no photo ID is specified, just load place data and display gallery
-            if (this.$route.name === 'Initial-With-Place') {
-                const placeFound = this.setCurrentPlaceDataViaRoute()
-
-                // error handling if no place was found
-                if (!placeFound) {
-                    this.$router.push({name: 'Initial'})
-                }
-
-            // if photo ID is specified, load place & gallery and then display photo in carousel
-            } else if (this.$route.name === 'Initial-With-Place-And-Photo-Index') {
-                const placeFound = this.setCurrentPlaceDataViaRoute()
-
-                // error handling if no place was found
-                if (!placeFound) {
-                    this.$router.push({name: 'Initial'})
-                } else {
-                    const photoObject = this.currentPlaceData.photos[this.$route.params.photoIndex]
-                    // error handling if no photo with id was was not found
-                    if (photoObject) {
-                        this.currentImage = photoObject
-                        this.showCarousel = true
-                    } else {
-                        this.$router.push({
-                            name: 'Initial-With-Place',
-                            params: {
-                                place: this.place
-                            }
-                        })
-                    }
-                }
-            }
+            this.handleRouteChange()
         },
         data () {
             return {
@@ -98,6 +72,42 @@
             }
         },
         methods: {
+            handleRouteChange: function () {
+                this.showCarousel = false
+
+                // if no photo ID is specified, just load place data and display gallery
+                if (this.$route.name === 'Initial-With-Place') {
+                    const placeFound = this.setCurrentPlaceDataViaRoute()
+
+                    // error handling if no place was found
+                    if (!placeFound) {
+                        this.$router.push({name: 'Initial'})
+                    }
+
+                // if photo ID is specified, load place & gallery and then display photo in carousel
+                } else if (this.$route.name === 'Initial-With-Place-And-Photo-Index') {
+                    const placeFound = this.setCurrentPlaceDataViaRoute()
+
+                    // error handling if no place was found
+                    if (!placeFound) {
+                        this.$router.push({name: 'Initial'})
+                    } else {
+                        const photoObject = this.currentPlaceData.photos[this.$route.params.photoIndex]
+                        // error handling if no photo with id was was not found
+                        if (photoObject) {
+                            this.currentImage = photoObject
+                            this.showCarousel = true
+                        } else {
+                            this.$router.push({
+                                name: 'Initial-With-Place',
+                                params: {
+                                    place: this.place
+                                }
+                            })
+                        }
+                    }
+                }
+            },
             handleGalleryPhotoClick: function (photo) {
                 this.currentImage = photo
                 this.showCarousel = true
@@ -168,42 +178,6 @@
                 }
 
                 return -1
-            }
-        },
-        watch: {
-            '$route' (to, from) {
-                // if no photo ID is specified, just load place data and display gallery
-                if (this.$route.name === 'Initial-With-Place') {
-                    const placeFound = this.setCurrentPlaceDataViaRoute()
-
-                    // error handling if no place was found
-                    if (!placeFound) {
-                        this.$router.push({name: 'Initial'})
-                    }
-
-                // if photo ID is specified, load place & gallery and then display photo in carousel
-                } else if (this.$route.name === 'Initial-With-Place-And-Photo-Index') {
-                    const placeFound = this.setCurrentPlaceDataViaRoute()
-
-                    // error handling if no place was found
-                    if (!placeFound) {
-                        this.$router.push({name: 'Initial'})
-                    } else {
-                        const photoObject = this.currentPlaceData.photos[this.$route.params.photoIndex]
-                        // error handling if no photo with id was was not found
-                        if (photoObject) {
-                            this.currentImage = photoObject
-                            this.showCarousel = true
-                        } else {
-                            this.$router.push({
-                                name: 'Initial-With-Place',
-                                params: {
-                                    place: this.place
-                                }
-                            })
-                        }
-                    }
-                }
             }
         }
     }

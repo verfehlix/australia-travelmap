@@ -54,15 +54,7 @@
                 this.$refs.mapPanel.classList.add('soloMargin')
             })
 
-            const routePlaceName = this.place
-
-            for (let i = 0; i < this.travelData.places.length; i++) {
-                const placeData = this.travelData.places[i]
-
-                if (placeData.id === routePlaceName) {
-                    this.currentPlace = placeData
-                }
-            }
+            this.setCurrentPlace()
         },
         mounted: function () {
             VueGoogleMaps.loaded.then(() => {
@@ -73,15 +65,7 @@
         },
         watch: {
             '$route': function () {
-                const routePlaceName = this.place
-
-                for (let i = 0; i < this.travelData.places.length; i++) {
-                    const placeData = this.travelData.places[i]
-
-                    if (placeData.id === routePlaceName) {
-                        this.currentPlace = placeData
-                    }
-                }
+                this.setCurrentPlace()
             }
         },
         data () {
@@ -166,6 +150,17 @@
             }
         },
         methods: {
+            setCurrentPlace: function () {
+                const routePlaceName = this.place
+
+                for (let i = 0; i < this.travelData.places.length; i++) {
+                    const placeData = this.travelData.places[i]
+
+                    if (placeData.id === routePlaceName) {
+                        this.currentPlace = placeData
+                    }
+                }
+            },
             handlePlaceButtonClick: function (place) {
                 // replace with own pan function (with easing) https://codepen.io/ErDmKo/pen/Jdpmzv
                 this.$refs.gmap.panTo(place.coordinates)
